@@ -1,15 +1,16 @@
-
 import { Botao } from "@/componentes/Botao";
+import { router } from "expo-router";
 import { Text, View, StyleSheet } from "react-native";
+
 
 export default function Login() {
     return (
         <View style={styles.container}>
 
             <Text style={styles.title}>Bem vindo{"\n"} ao Cesta {"\n"} do amanhã</Text>
-            <Botao title="Instituição" />
+            <Botao onPress={()=> router.navigate("/paginaLogin")} title="Login" />
             <Text>Realize o login para acessar sua conta</Text>
-            <Botao title="Voluntario" />
+            <Botao title="Cadastro" />
             <Text>Faça o cadastro se for sua primeira vez</Text>
 
         </View>
@@ -27,20 +28,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
     },
-    button: {
-        backgroundColor: '#feb06a',
-        padding: 10,
-        width: '75%',
-        height: '6%',
-        alignItems: 'center',
-        marginTop: 10,
-        borderRadius: 15,
-        justifyContent: 'center',
-    },
-    buttonTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#fff',
-    }
+
 
 })

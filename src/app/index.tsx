@@ -8,11 +8,10 @@ export default function Login() {
         <View style={styles.container}>
 
             <Text style={styles.title}>Bem vindo{"\n"} ao Cesta {"\n"} do amanhã</Text>
-            <Botao onPress={()=> router.navigate("/paginaLogin")} title="Login" />
+            <Botao onPress={()=> router.navigate("/login")} title="Login" />
             <Text>Realize o login para acessar sua conta</Text>
-            <Botao title="Cadastro" />
+            <Botao onPress={()=> router.navigate("/paginaLogin")} title="Cadastro" />
             <Text>Faça o cadastro se for sua primeira vez</Text>
-
         </View>
     )
 }
@@ -27,7 +26,5 @@ const styles = StyleSheet.create({
         fontSize: 55,
         textAlign: 'center',
         fontWeight: 'bold',
-    },
-
-
+    }
 })

@@ -8,9 +8,9 @@ export default function Login() {
         <View style={styles.container}>
 
             <Text style={styles.title}>Bem vindo{"\n"} ao Cesta {"\n"} do amanhã</Text>
-            <Botao title="Login" onPress={() => router.navigate('/paginaLogin')} />
+            <Botao title="Login" />
             <Text>Realize o login para acessar sua conta</Text>
-            <Botao title="Cadastro" onPress={()=> router.navigate('/cadastro')}/>
+            <Botao title="Cadastro" onPress={()=> router.navigate('/paginaLogin')}/>
             <Text>Faça o cadastro se for sua primeira vez</Text>
         </View>
     )

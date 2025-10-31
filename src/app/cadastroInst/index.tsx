@@ -27,8 +27,9 @@ export default function Cadastro(){
                     <TextInput style={styles.inputText}/>
                 <Text style={styles.textDados}>CPF DO RESPONSÁVEL</Text>
                     <TextInput style={styles.inputText}/>
-                    <Pressable style={styles.button}>
-                        <Text onPress={()=> router.navigate("/paginaPrincipal")} style={styles.buttonText}>Cadastrar</Text>
+                    <Pressable style={styles.button}
+                    onPress={()=> router.navigate("/login")}>
+                        <Text style={styles.buttonText}>Cadastrar</Text>
                     </Pressable>
             </View>
         </View>

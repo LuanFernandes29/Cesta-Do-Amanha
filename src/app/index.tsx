@@ -3,7 +3,7 @@ import { router } from "expo-router";
 import { Text, View, StyleSheet } from "react-native";
 
 
-export default function PaginaPrincipal() {
+export default function Principal() {
     return (
         <View style={styles.container}>
 

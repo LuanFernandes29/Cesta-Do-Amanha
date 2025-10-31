@@ -62,6 +62,54 @@ export default function Layout() {
           )
         }}
       />  
+      <Drawer.Screen
+        name='login/index'
+        options={{
+          drawerItemStyle: { display: 'none' },
+          title: '',
+          headerLeft: () => (
+            <Ionicons
+              name='arrow-back'
+              size={24}
+              color='#fff'
+              style={{ marginLeft: 16 }}
+              onPress={() => router.back()}
+            />
+          )
+        }}
+      />  
+      <Drawer.Screen
+        name='paginaPrincipal/index'
+        options={{
+          drawerItemStyle: { display: 'none' },
+          title: '',
+          headerLeft: () => (
+            <Ionicons
+              name='arrow-back'
+              size={24}
+              color='#fff'
+              style={{ marginLeft: 16 }}
+              onPress={() => router.back()}
+            />
+          )
+        }}
+      />  
+      <Drawer.Screen
+        name='recuperar/index'
+        options={{
+          drawerItemStyle: { display: 'none' },
+          title: '',
+          headerLeft: () => (
+            <Ionicons
+              name='arrow-back'
+              size={24}
+              color='#fff'
+              style={{ marginLeft: 16 }}
+              onPress={() => router.navigate('/login')}
+            />
+          )
+        }}
+      />  
     </Drawer>
   );
 }

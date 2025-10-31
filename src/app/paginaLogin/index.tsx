@@ -8,9 +8,9 @@ export default function PaginaLogin() {
         <View style={styles.container}>
 
             <Text style={styles.title}>Bem vindo{"\n"} ao Cesta {"\n"} do amanhã</Text>
-            <Botao onPress={()=> router.navigate("/cadastroInst")} title="Instituição" /> {/*caso de erro tirar o /index, sem ele da erro para subir github*/}
+            <Botao onPress={()=> router.navigate("/cadastroInst")} title="Instituição" />
             <Text>Realize o login para acessar sua conta</Text>
-            <Botao onPress={()=> router.navigate("/cadastro")} title="Voluntario" /> {/*caso de erro tirar o /index*/}
+            <Botao onPress={()=> router.navigate("/cadastro")} title="Voluntario" />
             <Text>Faça o cadastro se for sua primeira vez</Text>
 
         </View>

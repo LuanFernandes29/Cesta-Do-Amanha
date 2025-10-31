@@ -20,15 +20,16 @@ export default function Login(){
                         secureTextEntry
                     />
                     <View style={styles.subContainer}>
-                        <Pressable style={styles.subButton}>
+                        <Pressable style={styles.subButton}
+                        onPress={()=> router.navigate("/recuperar")}>
                             <Text style={styles.subTextButton}>
                                 ESQUECEU SUA SENHA?
                             </Text>
                         </Pressable>
                     </View>
-                    <Pressable style={styles.button}>
-                        <Text 
-                            onPress={()=> router.navigate("/")} 
+                    <Pressable style={styles.button}
+                    onPress={()=> router.navigate("/paginaPrincipal")}>
+                        <Text  
                             style={styles.buttonText}>
                             Entrar
                         </Text>

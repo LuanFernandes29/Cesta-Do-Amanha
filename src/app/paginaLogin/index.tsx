@@ -3,7 +3,7 @@ import { Botao } from "@/componentes/Botao";
 import { router } from "expo-router";
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Login() {
+export default function PaginaLogin() {
     return (
         <View style={styles.container}>
 

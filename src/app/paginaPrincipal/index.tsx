@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     },
     card: {
         width: CARD_WIDTH,
-        height: width * 0.77,
+        height: 350,
         borderRadius: 15,
         overflow: "hidden",
         marginRight: CARD_MARGIN,

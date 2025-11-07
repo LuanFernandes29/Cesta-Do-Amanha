@@ -28,7 +28,7 @@ export default function Login(){
                         </Pressable>
                     </View>
                     <Pressable style={styles.button}
-                    onPress={()=> router.navigate("/Pages/paginaPrincipal/index")}>
+                    onPress={()=> router.navigate("/paginaPrincipal")}>
                         <Text  
                             style={styles.buttonText}>
                             Entrar

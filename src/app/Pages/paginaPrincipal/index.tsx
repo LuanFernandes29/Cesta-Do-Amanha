@@ -22,7 +22,7 @@ const CARD_MARGIN = 20;
 const FotoPerfilMock = () => (
     <View style={styles.fotoContainer}>
         <Image
-            source={require("../../assets/fototeste.jpg")} // Caminho da imagem local
+            source={require("../../../assets/fototeste.jpg")} // Caminho da imagem local
             style={styles.perfilImage}
         />
     </View>

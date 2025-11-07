@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 
+
 export default function Layout() {
   return (
     <Drawer
@@ -12,7 +13,6 @@ export default function Layout() {
         }
 
       }>
-      <Drawer.Screen name="PaginaPrincipal/index" options={{ title: 'Página Principal', headerShown: true }} />
       <Drawer.Screen name="index" options={{ title: 'Login', headerShown: false }} />
       <Drawer.Screen
         name='paginaLogin/index'
@@ -78,22 +78,7 @@ export default function Layout() {
           )
         }}
       />  
-      <Drawer.Screen
-        name='paginaPrincipal/index'
-        options={{
-          drawerItemStyle: { display: 'none' },
-          title: '',
-          headerLeft: () => (
-            <Ionicons
-              name='arrow-back'
-              size={24}
-              color='#fff'
-              style={{ marginLeft: 16 }}
-              onPress={() => router.back()}
-            />
-          )
-        }}
-      />  
+      
       <Drawer.Screen
         name='recuperar/index'
         options={{
@@ -107,6 +92,7 @@ export default function Layout() {
               style={{ marginLeft: 16 }}
               onPress={() => router.navigate('/login')}
             />
+            
           )
         }}
       />  

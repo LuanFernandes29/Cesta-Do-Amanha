@@ -1,15 +1,5 @@
 import React, { useRef } from "react";
-import {
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
-    StatusBar,
-    ScrollView,
-    Image,
-    TouchableOpacity,
-    Dimensions,
-} from "react-native";
+import { View, Text, StyleSheet, TextInput, StatusBar, ScrollView, Image, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
@@ -22,7 +12,7 @@ const CARD_MARGIN = 20;
 const FotoPerfilMock = () => (
     <View style={styles.fotoContainer}>
         <Image
-            source={require("../../../assets/fototeste.jpg")} // Caminho da imagem local
+            source={require("../../assets/fototeste.jpg")} // Caminho da imagem local
             style={styles.perfilImage}
         />
     </View>
@@ -129,6 +119,7 @@ const styles = StyleSheet.create({
         backgroundColor:"rgb(239, 237, 237)",
         paddingTop: 50,
     },
+
     cabecalho: {
         paddingHorizontal: 20,
         marginBottom: 30,
@@ -136,12 +127,14 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
     },
+
     textContainer: {},
     titulo: {
         color:"rgb(118, 161, 194)",
         fontSize: 24,
         fontWeight: "700",
     },
+
     subtitulo: {
         color: "#7A9EB8",
         fontSize: 12,
@@ -149,6 +142,7 @@ const styles = StyleSheet.create({
         marginTop: 3,
         letterSpacing: 0.5,
     },
+
     fotoContainer: {
         width: 60,
         height: 60,
@@ -157,11 +151,13 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "#3D739C",
     },
+
     perfilImage: {
         width: "100%",
         height: "100%",
         resizeMode: "cover",
     },
+
     searchContainer: {
         flexDirection: "row",
         alignItems: "center",
@@ -174,14 +170,17 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#ccc",
     },
+
     searchIcon: {
         marginRight: 10,
     },
+
     searchInput: {
         flex: 1,
         fontSize: 14,
         color: "#021123",
     },
+
     instituicoesHeader: {
         flexDirection: "row",
         justifyContent: "space-between",
@@ -190,23 +189,28 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         marginTop: 10,
     },
+
     instituicoesTitulo: {
         fontSize: 27.3,
         fontWeight: "700",
         color: "#3D739C",
     },
+
     verTudo: {
         fontSize: 12,
         color: "#7A9EB8",
     },
+
     carrosselWrapper: {
         position: "relative",
         marginBottom: 20,
     },
+
     carrosselContainer: {
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
+
     card: {
         width: CARD_WIDTH,
         height: 350,
@@ -220,11 +224,13 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         shadowRadius: 6,
     },
+
     cardImage: {
         width: "100%",
         height: "100%",
         resizeMode: "cover",
     },
+
     arrowLeft: {
         position: "absolute",
         top: "40%",
@@ -234,6 +240,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 2,
     },
+
     arrowRight: {
         position: "absolute",
         top: "40%",
@@ -242,5 +249,5 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(255, 255, 255, 0.7)",
         borderRadius: 20,
         padding: 2,
-    },
+    }
 });

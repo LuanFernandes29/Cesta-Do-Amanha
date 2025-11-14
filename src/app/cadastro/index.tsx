@@ -25,7 +25,7 @@ export default function Cadastro() {
             nascimento,
         };
 
-        addUser(novoUsuario); // salva no contexto global
+        addUser(novoUsuario);
 
         console.log("Usuário cadastrado:", novoUsuario);
 

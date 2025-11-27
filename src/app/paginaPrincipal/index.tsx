@@ -1,18 +1,18 @@
-import React, { useRef, useContext } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  StatusBar,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { InstituicoesContext } from "../../InstContext"; // caminho conforme seu print
+import React, { useContext, useRef } from "react";
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { InstituicoesContext } from "../../InstContext";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.8;
@@ -29,7 +29,6 @@ export default function PaginaPrincipal() {
   const scrollRef = useRef<ScrollView | null>(null);
   let currentScrollPos = 0;
 
-  // pegamos até 3 instituições (se houver)
   const mostradas = insts.slice(0, 3);
 
   const scrollRight = () => {
@@ -47,7 +46,6 @@ export default function PaginaPrincipal() {
   };
 
   function abrirInstituicao(id: any) {
-    // envia id para a rota da instituição
     router.push({
       pathname: "/instituicaoDoador",
       params: { id: String(id) },
@@ -176,17 +174,99 @@ const styles = StyleSheet.create({
     borderColor: "#ccc" 
   },
   
-  searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, fontSize: 14, color: "#021123" },
-  instituicoesHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, marginBottom: 15, marginTop: 10 },
-  instituicoesTitulo: { fontSize: 27.3, fontWeight: "700", color: "#3D739C" },
-  verTudo: { fontSize: 12, color: "#7A9EB8" },
-  carrosselWrapper: { position: "relative", marginBottom: 20 },
-  carrosselContainer: { paddingHorizontal: 20, paddingVertical: 10 },
-  card: { width: CARD_WIDTH, height: 350, borderRadius: 15, overflow: "hidden", marginRight: CARD_MARGIN, backgroundColor: "#fff", elevation: 5, shadowColor: "#000", shadowOpacity: 0.2, shadowOffset: { width: 0, height: 4 }, shadowRadius: 6 },
-  cardImage: { width: "100%", height: "100%", resizeMode: "cover" },
-  cardOverlay: { position: "absolute", bottom: 0, left: 0, right: 0, padding: 10, backgroundColor: "rgba(0,0,0,0.35)" },
-  cardTitle: { color: "#fff", fontSize: 18, fontWeight: "700" },
-  arrowLeft: { position: "absolute", top: "40%", left: 5, zIndex: 10, backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 20, padding: 2 },
-  arrowRight: { position: "absolute", top: "40%", right: 5, zIndex: 10, backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 20, padding: 2 },
+  searchIcon: { 
+    marginRight: 10 
+  },
+
+  searchInput: { 
+    flex: 1, 
+    fontSize: 14, 
+    color: "#021123" 
+  },
+
+  instituicoesHeader: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    paddingHorizontal: 20, 
+    marginBottom: 15, 
+    marginTop: 10 
+  },
+
+  instituicoesTitulo: { 
+    fontSize: 27.3, 
+    fontWeight: "700", 
+    color: "#3D739C" 
+  },
+
+  verTudo: { 
+    fontSize: 12, 
+    color: "#7A9EB8" 
+  },
+
+  carrosselWrapper: { 
+    position: "relative", 
+    marginBottom: 20 
+  },
+
+  carrosselContainer: { 
+    paddingHorizontal: 20, 
+    paddingVertical: 10 
+  },
+
+  card: { 
+    width: CARD_WIDTH, 
+    height: 350, 
+    borderRadius: 15, 
+    overflow: "hidden", 
+    marginRight: CARD_MARGIN, 
+    backgroundColor: "#fff", 
+    elevation: 5, 
+    shadowColor: "#000", 
+    shadowOpacity: 0.2, 
+    shadowOffset: { width: 0, height: 4 }, 
+    shadowRadius: 6 
+  },
+
+  cardImage: { 
+    width: "100%", 
+    height: "100%", 
+    resizeMode: "cover" 
+  },
+
+  cardOverlay: { 
+    position: "absolute", 
+    bottom: 0, 
+    left: 0, 
+    right: 0, 
+    padding: 10, 
+    backgroundColor: "rgba(0,0,0,0.35)" 
+  },
+
+  cardTitle: { 
+    color: "#fff", 
+    fontSize: 18, 
+    fontWeight: "700" 
+  },
+
+  arrowLeft: { 
+    position: "absolute", 
+    top: "40%", 
+    left: 5, 
+    zIndex: 10, 
+    backgroundColor: "rgba(255,255,255,0.7)", 
+    borderRadius: 20, 
+    padding: 2 
+  },
+
+  arrowRight: { 
+    position: "absolute", 
+    top: "40%", 
+    right: 5, 
+    zIndex: 10, 
+    backgroundColor: "rgba(255,255,255,0.7)", 
+    borderRadius: 20, 
+    padding: 2 
+  }
+
 });

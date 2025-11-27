@@ -4,40 +4,51 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const InstituicoesContext = createContext({
   insts: [],
   addInst: (inst: any) => {},
+  addCampanha: (instId: any, campanha: any) => {},
+  removeCampanha: (instId: any, campanhaId: any) => {},
   getById: (id: any) => null,
 });
 
 export function InstituicoesProvider({ children }: any) {
   const [insts, setInsts] = useState<any[]>([]);
 
-  // carrega do storage ao iniciar
   useEffect(() => {
     async function load() {
-      try {
-        const saved = await AsyncStorage.getItem("@insts");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          console.log("🔥 INSTS CARREGADAS DO STORAGE:", parsed);
-          setInsts(parsed);
-        } else {
-          console.log("🔍 Nenhuma instituicao no storage ainda.");
-        }
-      } catch (err) {
-        console.warn("Erro ao carregar insts:", err);
-      }
+      const saved = await AsyncStorage.getItem("@insts");
+      if (saved) setInsts(JSON.parse(saved));
     }
     load();
   }, []);
 
-  // salva sempre que mudar
   useEffect(() => {
-    AsyncStorage.setItem("@insts", JSON.stringify(insts))
-      .then(() => console.log("💾 INSTS SALVAS:", insts))
-      .catch(err => console.warn("Erro ao salvar insts:", err));
+    AsyncStorage.setItem("@insts", JSON.stringify(insts));
   }, [insts]);
 
   function addInst(inst: any) {
-    setInsts(prev => [...prev, inst]);
+    setInsts(prev => [...prev, { ...inst, campanhas: [] }]);
+  }
+
+  function addCampanha(instId: any, campanha: any) {
+    setInsts(prev =>
+      prev.map(i =>
+        String(i.id) === String(instId)
+          ? { ...i, campanhas: [...(i.campanhas || []), campanha] }
+          : i
+      )
+    );
+  }
+
+  function removeCampanha(instId: any, campanhaId: any) {
+    setInsts(prev =>
+      prev.map(i =>
+        String(i.id) === String(instId)
+          ? {
+              ...i,
+              campanhas: i.campanhas.filter(c => String(c.id) !== String(campanhaId)),
+            }
+          : i
+      )
+    );
   }
 
   function getById(id: any) {
@@ -45,7 +56,9 @@ export function InstituicoesProvider({ children }: any) {
   }
 
   return (
-    <InstituicoesContext.Provider value={{ insts, addInst, getById }}>
+    <InstituicoesContext.Provider
+      value={{ insts, addInst, addCampanha, removeCampanha, getById }}
+    >
       {children}
     </InstituicoesContext.Provider>
   );

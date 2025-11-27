@@ -4,7 +4,6 @@ import { Drawer } from 'expo-router/drawer';
 import { UsersProvider } from "../UsersContext";
 import { InstituicoesProvider } from '@/InstContext';
 
-
 export default function Layout() {
   return (
     <UsersProvider>
@@ -16,7 +15,13 @@ export default function Layout() {
               headerTintColor: '#fff',
             }
           }>
-          <Drawer.Screen name="index" options={{ title: 'Login', headerShown: false }} />
+
+          <Drawer.Screen name="index" options={{ title: '', headerShown: false,  drawerItemStyle: { display: 'none' }}}/>
+          <Drawer.Screen name="paginaPrincipal/index" options={{ title: 'Página Principal', headerShown: true }}/>
+          <Drawer.Screen name="doacoes/index" options={{ title: 'Doação', headerShown: true }}/>
+          <Drawer.Screen name="instituicaoDoador/index" options={{ title: '', headerShown: true, drawerItemStyle: { display: 'none'}}}/>
+          <Drawer.Screen name="paginaPrincipalInstituicao/index" options={{ title: 'Instituição', headerShown: true }}/>
+
           <Drawer.Screen
             name='paginaLogin/index'
             options={{
@@ -44,7 +49,7 @@ export default function Layout() {
                   size={24}
                   color='#fff'
                   style={{ marginLeft: 16 }}
-                  onPress={() => router.replace('/')} // 💡 CORREÇÃO APLICADA AQUI
+                  onPress={() => router.replace('/')}
                 />
               )
             }}
@@ -60,7 +65,7 @@ export default function Layout() {
                   size={24}
                   color='#fff'
                   style={{ marginLeft: 16 }}
-                  onPress={() => router.replace('/')} // 💡 CORREÇÃO APLICADA AQUI (Assumindo que volta para a raiz)
+                  onPress={() => router.replace('/')}
                 />
               )
             }}

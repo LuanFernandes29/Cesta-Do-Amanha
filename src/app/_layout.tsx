@@ -34,7 +34,7 @@ export default function Layout() {
             }}
           />
           <Drawer.Screen
-            name='cadastro/index'
+            name='cadastro/index' // Cadastro de Usuário (Pessoa Física)
             options={{
               drawerItemStyle: { display: 'none' },
               title: '',
@@ -44,13 +44,13 @@ export default function Layout() {
                   size={24}
                   color='#fff'
                   style={{ marginLeft: 16 }}
-                  onPress={() => router.back()}
+                  onPress={() => router.replace('/')} // 💡 CORREÇÃO APLICADA AQUI
                 />
               )
             }}
           />
           <Drawer.Screen
-            name='cadastroInst/index'
+            name='cadastroInst/index' // Cadastro de Instituição
             options={{
               drawerItemStyle: { display: 'none' },
               title: '',
@@ -60,7 +60,7 @@ export default function Layout() {
                   size={24}
                   color='#fff'
                   style={{ marginLeft: 16 }}
-                  onPress={() => router.back()}
+                  onPress={() => router.replace('/')} // 💡 CORREÇÃO APLICADA AQUI (Assumindo que volta para a raiz)
                 />
               )
             }}
@@ -81,7 +81,7 @@ export default function Layout() {
               )
             }}
           />
-        
+
           <Drawer.Screen
             name='recuperar/index'
             options={{
@@ -95,7 +95,7 @@ export default function Layout() {
                   style={{ marginLeft: 16 }}
                   onPress={() => router.navigate('/login')}
                 />
-        
+
               )
             }}
           />

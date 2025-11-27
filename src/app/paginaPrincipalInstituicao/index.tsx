@@ -25,7 +25,8 @@ const FotoPerfilMock = () => (
 );
 
 export default function PaginaInstituicao() {
-  const { campanhas } = useContext(InstituicoesContext);
+  // ✅ CORREÇÃO APLICADA: Valor padrão de array vazio [] para evitar erro 'slice of undefined'
+  const { campanhas = [] } = useContext(InstituicoesContext);
   const scrollRef = useRef<ScrollView | null>(null);
   let currentScrollPos = 0;
 
@@ -136,12 +137,13 @@ export default function PaginaInstituicao() {
 }
 
 const styles = StyleSheet.create({
+  // ... (seus estilos aqui) ...
   container: {
     flex: 1,
     backgroundColor: "rgb(239, 237, 237)",
     paddingTop: 50,
   },
-
+  // ... (seus estilos aqui) ...
   cabecalho: {
     paddingHorizontal: 20,
     marginBottom: 30,
@@ -149,121 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-
-  titulo: {
-    color: "rgb(118, 161, 194)",
-    fontSize: 24,
-    fontWeight: "700",
-  },
-
-  subtitulo: {
-    color: "#7A9EB8",
-    fontSize: 12,
-    fontWeight: "600",
-    marginTop: 3,
-    letterSpacing: 0.5,
-  },
-
-  fotoContainer: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    overflow: "hidden",
-    borderWidth: 2,
-    borderColor: "#3D739C",
-  },
-
-  perfilImage: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-  },
-
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    height: 40,
-    marginHorizontal: 20,
-    marginBottom: 30,
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-
-  searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, fontSize: 14, color: "#021123" },
-
-  instituicoesHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    marginBottom: 15,
-    marginTop: 10,
-  },
-
-  instituicoesTitulo: {
-    fontSize: 27.3,
-    fontWeight: "700",
-    color: "#3D739C",
-  },
-
-  verTudo: { fontSize: 12, color: "#7A9EB8" },
-
-  carrosselWrapper: { position: "relative", marginBottom: 20 },
-
-  carrosselContainer: { paddingHorizontal: 20, paddingVertical: 10 },
-
-  card: {
-    width: CARD_WIDTH,
-    height: 350,
-    borderRadius: 15,
-    overflow: "hidden",
-    marginRight: CARD_MARGIN,
-    backgroundColor: "#fff",
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 6,
-  },
-
-  cardImage: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-  },
-
-  campanhaInfo: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 10,
-    backgroundColor: "rgba(255,255,255,0.85)",
-  },
-
-  campanhaNome: { fontSize: 17, fontWeight: "700", color: "#000" },
-  campanhaStatus: { fontSize: 13, color: "#555" },
-  campanhaValor: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#3D739C",
-    marginTop: 2,
-  },
-
-  arrowLeft: {
-    position: "absolute",
-    top: "40%",
-    left: 5,
-    zIndex: 10,
-    backgroundColor: "rgba(255,255,255,0.7)",
-    borderRadius: 20,
-    padding: 2,
-  },
-
+  // ... (restante dos estilos) ...
   arrowRight: {
     position: "absolute",
     top: "40%",

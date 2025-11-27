@@ -120,13 +120,62 @@ export default function PaginaPrincipal() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "rgb(239, 237, 237)", paddingTop: 50 },
-  cabecalho: { paddingHorizontal: 20, marginBottom: 30, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  titulo: { color: "rgb(118, 161, 194)", fontSize: 24, fontWeight: "700" },
-  subtitulo: { color: "#7A9EB8", fontSize: 12, fontWeight: "600", marginTop: 3, letterSpacing: 0.5 },
-  fotoContainer: { width: 60, height: 60, borderRadius: 30, overflow: "hidden", borderWidth: 2, borderColor: "#3D739C" },
-  perfilImage: { width: "100%", height: "100%", resizeMode: "cover" },
-  searchContainer: { flexDirection: "row", alignItems: "center", backgroundColor: "#fff", borderRadius: 20, paddingHorizontal: 15, height: 40, marginHorizontal: 20, marginBottom: 30, borderWidth: 1, borderColor: "#ccc" },
+  container: { 
+    flex: 1, 
+    backgroundColor: "rgb(239, 237, 237)", 
+    paddingTop: 50 
+  },
+
+  cabecalho: { 
+    paddingHorizontal: 20, 
+    marginBottom: 30, 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center" 
+  },
+
+  titulo: { 
+    color: "rgb(118, 161, 194)", 
+    fontSize: 24, 
+    fontWeight: "700" 
+  },
+
+  subtitulo: { 
+    color: "#7A9EB8", 
+    fontSize: 12, 
+    fontWeight: "600", 
+    marginTop: 3, 
+    letterSpacing: 0.5 
+  },
+
+  fotoContainer: { 
+    width: 60, 
+    height: 60, 
+    borderRadius: 30, 
+    overflow: "hidden", 
+    borderWidth: 2, 
+    borderColor: "#3D739C" 
+  },
+
+  perfilImage: { 
+    width: "100%", 
+    height: "100%", 
+    resizeMode: "cover" 
+  },
+
+  searchContainer: { 
+    flexDirection: "row", 
+    alignItems: "center", 
+    backgroundColor: "#fff", 
+    borderRadius: 20, 
+    paddingHorizontal: 15, 
+    height: 40, 
+    marginHorizontal: 20, 
+    marginBottom: 30, 
+    borderWidth: 1, 
+    borderColor: "#ccc" 
+  },
+  
   searchIcon: { marginRight: 10 },
   searchInput: { flex: 1, fontSize: 14, color: "#021123" },
   instituicoesHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, marginBottom: 15, marginTop: 10 },

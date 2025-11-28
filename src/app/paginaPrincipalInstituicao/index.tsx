@@ -76,9 +76,6 @@ export default function PaginaInstituicao() {
 
       <View style={styles.instituicoesHeader}>
         <Text style={styles.instituicoesTitulo}>Minhas Campanhas Ativas</Text>
-        <TouchableOpacity onPress={() => router.push("/cadastrarCampanha")}>
-          <Text style={styles.verTudo}>Cadastrar nova</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={styles.carrosselWrapper}>

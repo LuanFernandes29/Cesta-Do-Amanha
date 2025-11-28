@@ -67,6 +67,7 @@ export default function Cadastro() {
             cep,
             cpfResp,
             foto: foto || null,
+            tipo: "instituicao",
         };
 
         addInst(newInst);
@@ -74,7 +75,7 @@ export default function Cadastro() {
         console.log("🎉 INSTITUIÇÃO CADASTRADA:", newInst);
 
         // 🚨 CORRIGIDO: Alterado de "/principal" para "/paginaPrincipal"
-        router.push("/paginaPrincipal"); 
+        router.push("/login"); 
     }
 
     return (

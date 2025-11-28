@@ -25,7 +25,30 @@ export function InstituicoesProvider({ children }: any) {
   }, [insts]);
 
   function addInst(inst: any) {
-    setInsts(prev => [...prev, { ...inst, campanhas: [] }]);
+    setInsts(prev => [
+      ...prev,
+      { 
+        ...inst, 
+        id: Date.now().toString(), // Cria ID único
+        campanhas: [] 
+      }
+    ]);
+  }
+
+  // 🔥 FUNÇÃO ÚNICA E OFICIAL PARA REMOVER CAMPANHA
+  function removeCampanha(instId: any, campanhaId: any) {
+    setInsts(prev =>
+      prev.map(inst =>
+        String(inst.id) === String(instId)
+          ? {
+              ...inst,
+              campanhas: inst.campanhas.filter(
+                c => String(c.id) !== String(campanhaId)
+              ),
+            }
+          : inst
+      )
+    );
   }
 
   function addCampanha(instId: any, campanha: any) {
@@ -33,19 +56,6 @@ export function InstituicoesProvider({ children }: any) {
       prev.map(i =>
         String(i.id) === String(instId)
           ? { ...i, campanhas: [...(i.campanhas || []), campanha] }
-          : i
-      )
-    );
-  }
-
-  function removeCampanha(instId: any, campanhaId: any) {
-    setInsts(prev =>
-      prev.map(i =>
-        String(i.id) === String(instId)
-          ? {
-              ...i,
-              campanhas: i.campanhas.filter(c => String(c.id) !== String(campanhaId)),
-            }
           : i
       )
     );

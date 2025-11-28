@@ -1,29 +1,43 @@
 import { useState, useContext } from "react";
 import { router } from "expo-router";
 import { Pressable, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
+
 import { UsersContext } from "../../UsersContext";
+import { InstituicoesContext } from "../../InstContext";
 
 export default function Login() {
     const { login } = useContext(UsersContext);
+    const { insts } = useContext(InstituicoesContext);
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
     function VerifyLogin() {
-        const ok = login(email, senha);
+        const user = login(email, senha, insts);
 
-        if (ok) {
-            router.navigate("/paginaPrincipal");
-        } else {
+        if (!user) {
             alert("Email ou senha incorretos!");
+            return;
         }
+
+        // SE FOR INSTITUIÇÃO
+        if (user.tipo === "instituicao") {
+            router.push({
+                pathname: "/paginaPrincipalInstituicao",
+                params: { instId: String(user.id) }  // 🔥 AQUI AGORA ESTÁ CERTO
+            });
+            return;
+        }
+
+        // SE FOR VOLUNTÁRIO
+        router.navigate("/paginaPrincipal");
     }
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Cesta do amanhã</Text>
             <Text style={styles.subTitle}>Entrar</Text>
-            <StatusBar/>
+            <StatusBar />
             <View style={styles.branco}>
                 <Text style={styles.textDados}>EMAIL</Text>
                 <TextInput
@@ -47,6 +61,7 @@ export default function Login() {
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#457b9d" },

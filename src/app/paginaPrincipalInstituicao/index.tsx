@@ -11,26 +11,25 @@ import {
   Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { InstituicoesContext } from "../../InstContext";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.82;
 const CARD_MARGIN = 22;
 
-const FotoPerfilMock = () => (
-  <View style={styles.fotoContainer}>
-    <Image source={require("../../assets/fototeste.jpg")} style={styles.perfilImage} />
-  </View>
-);
-
 export default function PaginaInstituicao() {
+  const { instId } = useLocalSearchParams(); // <--- PEGA O ID CERTO
+
   const { insts } = useContext(InstituicoesContext);
-  const inst = insts && insts.length > 0 ? insts[0] : null;
-  const campanhas = Array.isArray(inst?.campanhas) ? inst!.campanhas : [];
+
+  const inst = insts.find(i => String(i.id) === String(instId)) ?? null;
+
+  const campanhas = Array.isArray(inst?.campanhas) ? inst.campanhas : [];
 
   const scrollRef = useRef<ScrollView | null>(null);
-  let currentScrollPos = 0;
+ 
+ let currentScrollPos = 0;
   const mostradas = campanhas.slice(0, 3);
 
   const scrollRight = () => {
@@ -50,19 +49,28 @@ export default function PaginaInstituicao() {
   function abrirCampanha(id: any) {
     router.push({
       pathname: "/campanhaDetalhes",
-      params: { id: String(id), instId: String(inst?.id ?? "") },
+      params: { id: String(id), instId: String(inst?.id) },
     });
   }
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <StatusBar barStyle="dark-content" backgroundColor="#e9e6e6" />
+
       <View style={styles.cabecalho}>
         <View style={styles.textContainer}>
-          <Text style={styles.titulo}>Olá, {inst ? inst.nome : "Instituição"}</Text>
+          <Text style={styles.titulo}>Olá, {inst?.nome ?? "Instituição"}</Text>
           <Text style={styles.subtitulo}>GERENCIE SUAS CAMPANHAS</Text>
         </View>
-        <FotoPerfilMock />
+
+        {/* FOTO DA INSTITUIÇÃO */}
+        <View style={styles.fotoContainer}>
+          {inst?.foto ? (
+            <Image source={{ uri: inst.foto }} style={styles.perfilImage} />
+          ) : (
+            <Image source={require("../../assets/instituicao.png")} style={styles.perfilImage} />
+          )}
+        </View>
       </View>
 
       <View style={styles.searchContainer}>
@@ -75,7 +83,18 @@ export default function PaginaInstituicao() {
       </View>
 
       <View style={styles.instituicoesHeader}>
-        <Text style={styles.instituicoesTitulo}>Minhas Campanhas Ativas</Text>
+        <Text style={styles.instituicoesTitulo}>Campanhas Ativas</Text>
+
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: "/todasCampanhasInstituicao",
+              params: { instId: String(inst?.id) },
+            })
+          }
+        >
+          <Text style={styles.verTudo}>Ver Todas</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.carrosselWrapper}>
@@ -87,14 +106,19 @@ export default function PaginaInstituicao() {
           scrollEnabled={false}
         >
           {mostradas.map((item: any) => (
-            <TouchableOpacity key={item.id} style={styles.card} onPress={() => abrirCampanha(item.id)}>
+            <TouchableOpacity
+              key={item.id}
+              style={styles.card}
+              onPress={() => abrirCampanha(item.id)}
+            >
               {item.foto ? (
                 <Image source={{ uri: item.foto }} style={styles.cardImage} />
               ) : (
                 <Image source={require("../../assets/instituicao.png")} style={styles.cardImage} />
               )}
+
               <View style={styles.campanhaOverlay}>
-                <Text style={styles.campanhaNome}>{item.nome || item.titulo}</Text>
+                <Text style={styles.campanhaNome}>{item.nome}</Text>
                 <Text style={styles.campanhaStatus}>Doando agora</Text>
                 <Text style={styles.campanhaValor}>R$ {item.valor ?? "0,00"}</Text>
               </View>
@@ -117,7 +141,15 @@ export default function PaginaInstituicao() {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.botaoCadastrar} onPress={() => router.push("/cadastrarCampanha")}>
+      <TouchableOpacity
+        style={styles.botaoCadastrar}
+        onPress={() =>
+          router.push({
+            pathname: "/cadastrarCampanha",
+            params: { instId: String(inst?.id) },
+          })
+        }
+      >
         <Text style={styles.botaoCadastrarTexto}>Cadastrar Nova Campanha</Text>
       </TouchableOpacity>
     </ScrollView>
@@ -161,17 +193,21 @@ const styles = StyleSheet.create({
   instituicoesHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
-    marginBottom: 20,
-  },
-  instituicoesTitulo: { fontSize: 26, fontWeight: "700", color: "#3D739C" },
-  verTudo: { fontSize: 14, color: "#3D739C", fontWeight: "700" },
-  carrosselWrapper: { position: "relative", marginBottom: 20 },
-  carrosselContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
+    marginBottom: 15,
+    marginTop: 10
+  },
+
+  instituicoesTitulo: {
+    fontSize: 27.3,
+    fontWeight: "700",
+    color: "#3D739C"
+  },
+
+  verTudo: {
+    fontSize: 12,
+    color: "#7A9EB8"
   },
   card: {
     width: CARD_WIDTH,
@@ -228,4 +264,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
   },
+
+
 });

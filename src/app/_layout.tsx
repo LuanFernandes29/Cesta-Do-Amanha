@@ -21,6 +21,8 @@ export default function Layout() {
           <Drawer.Screen name="doacoes/index" options={{ title: 'Doação', headerShown: true }}/>
           <Drawer.Screen name="instituicaoDoador/index" options={{ title: '', headerShown: true, drawerItemStyle: { display: 'none'}}}/>
           <Drawer.Screen name="paginaPrincipalInstituicao/index" options={{ title: 'Instituição', headerShown: true }}/>
+          <Drawer.Screen name="cadastrarCampanha/index" options={{ title: '', headerShown: true, drawerItemStyle: { display: 'none'} }}/>
+          <Drawer.Screen name="todasCampanhasInstituicao/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none'} }}/>
 
           <Drawer.Screen
             name='paginaLogin/index'

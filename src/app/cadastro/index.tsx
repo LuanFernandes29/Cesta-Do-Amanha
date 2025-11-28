@@ -45,6 +45,7 @@ export default function Cadastro() {
             cep,
             telefone,
             nascimento,
+            tipo:"user",
         };
 
         addUser(novoUsuario);

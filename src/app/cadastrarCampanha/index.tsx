@@ -14,7 +14,7 @@ import { InstituicoesContext } from "../../InstContext";
 import { router } from "expo-router";
 
 export default function CadastrarCampanha() {
-  const { insts, addCampaign } = useContext(InstituicoesContext);
+  const { insts, addCampanha } = useContext(InstituicoesContext);
   const inst = insts && insts.length > 0 ? insts[0] : null;
 
   const [nome, setNome] = useState("");
@@ -54,8 +54,8 @@ export default function CadastrarCampanha() {
       valor: valor.trim(),
       foto,
     };
-    addCampaign(inst.id, nova);
-    router.back();
+    addCampanha(inst.id, nova);
+    router.navigate("/paginaPrincipalInstituicao");
   }
 
   return (

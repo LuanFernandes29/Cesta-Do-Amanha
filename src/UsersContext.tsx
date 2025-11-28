@@ -35,18 +35,30 @@ export function UsersProvider({ children }) {
   function addUser(u) {
     setUsers(prev => [
       ...prev,
-      { ...u, id: Date.now(), tipo: "voluntario" }
+      { ...u, id: Date.now() }
     ]);
   }
 
-  function login(email, senha) {
-    const found = users.find(u => u.email === email && u.senha === senha);
-    if (found) {
-      setCurrentUser(found);
-      return found;
+  function login(email, senha, insts) {
+    // 1. Verificar voluntário
+    const foundUser = users.find(u => u.email === email && u.senha === senha);
+
+    if (foundUser) {
+        setCurrentUser(foundUser);
+        return { ...foundUser, tipo: "voluntario" };
     }
+
+    // 2. Verificar instituição
+    const foundInst = insts.find(i => i.email === email && i.senha === senha);
+
+    if (foundInst) {
+        setCurrentUser(foundInst);
+        return { ...foundInst, tipo: "instituicao" };
+    }
+
+    // Nenhum encontrado
     return null;
-  }
+}
 
   function logout() {
     setCurrentUser(null);

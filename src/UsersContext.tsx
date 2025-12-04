@@ -1,5 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { InstituicoesContext } from "../src/InstContext";
 
 export const UsersContext = createContext({
   users: [],
@@ -12,6 +13,9 @@ export const UsersContext = createContext({
 export function UsersProvider({ children }) {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+
+  // 👉 Puxa SEMPRE a versão atualizada das instituições
+  const { insts } = useContext(InstituicoesContext);
 
   useEffect(() => {
     async function load() {
@@ -39,26 +43,26 @@ export function UsersProvider({ children }) {
     ]);
   }
 
-  function login(email, senha, insts) {
+  function login(email, senha) {
     // 1. Verificar voluntário
     const foundUser = users.find(u => u.email === email && u.senha === senha);
 
     if (foundUser) {
-        setCurrentUser(foundUser);
-        return { ...foundUser, tipo: "voluntario" };
+      setCurrentUser({ ...foundUser, tipo: "voluntario" });
+      return { ...foundUser, tipo: "voluntario" };
     }
 
-    // 2. Verificar instituição
+    // 2. Verificar instituição — AGORA SEMPRE ATUALIZADA
     const foundInst = insts.find(i => i.email === email && i.senha === senha);
 
     if (foundInst) {
-        setCurrentUser(foundInst);
-        return { ...foundInst, tipo: "instituicao" };
+      const instUser = { ...foundInst, tipo: "instituicao" };
+      setCurrentUser(instUser);
+      return instUser;
     }
 
-    // Nenhum encontrado
     return null;
-}
+  }
 
   function logout() {
     setCurrentUser(null);

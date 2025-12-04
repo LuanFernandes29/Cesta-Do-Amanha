@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> d59fae3bdf757a6fcc009e5e5c31c7c13074d61b
 import { Botao } from "@/componentes/Botao";
 import { router } from "expo-router";
 import { Text, View, StyleSheet } from "react-native";

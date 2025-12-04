@@ -32,6 +32,7 @@ export default function Login() {
         // SE FOR VOLUNTÁRIO
         router.navigate("/paginaPrincipal");
     }
+    console.log("INSTS:", insts);
 
     return (
         <View style={styles.container}>

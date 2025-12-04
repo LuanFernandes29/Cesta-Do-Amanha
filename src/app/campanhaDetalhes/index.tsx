@@ -43,7 +43,7 @@ export default function CampanhaDetalhes() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => }>/
+        <TouchableOpacity onPress={() => router.navigate("/paginaPrincipalInstituicao")}>/
           <Ionicons name="arrow-back" size={26} color="#3D739C" />
         </TouchableOpacity>
 

@@ -80,12 +80,64 @@ export default function CadastrarCampanha() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "rgb(239, 237, 237)", padding: 20, paddingTop: 60 },
-  titulo: { fontSize: 24, fontWeight: "700", color: "#3D739C", marginBottom: 20 },
-  fotoBox: { width: "100%", height: 180, backgroundColor: "#d9d9d9", borderRadius: 15, justifyContent: "center", alignItems: "center", marginBottom: 20 },
-  fotoTexto: { color: "#4d6c82", fontSize: 16, fontWeight: "600" },
-  fotoPreview: { width: "100%", height: "100%", borderRadius: 15 },
-  input: { backgroundColor: "#fff", borderRadius: 12, paddingHorizontal: 15, paddingVertical: 12, fontSize: 15, marginBottom: 15, borderWidth: 1, borderColor: "#ccc" },
-  botao: { backgroundColor: "#3D739C", paddingVertical: 14, borderRadius: 12, alignItems: "center", marginTop: 10 },
-  botaoTexto: { color: "#fff", fontSize: 16, fontWeight: "700" },
+  container: { 
+    flex: 1, 
+    backgroundColor: "rgb(239, 237, 237)", 
+    padding: 20, 
+    paddingTop: 60 
+  },
+
+  titulo: { 
+    fontSize: 24, 
+    fontWeight: "700", 
+    color: "#3D739C", 
+    marginBottom: 20 
+  },
+
+  fotoBox: { 
+    width: "100%", 
+    height: 180, 
+    backgroundColor: "#d9d9d9", 
+    borderRadius: 15, 
+    justifyContent: "center", 
+    alignItems: "center", 
+    marginBottom: 20 
+  },
+
+  fotoTexto: { 
+    color: "#4d6c82", 
+    fontSize: 16, 
+    fontWeight: "600" 
+  },
+
+  fotoPreview: { 
+    width: "100%", 
+    height: "100%", 
+    borderRadius: 15 
+  },
+
+  input: { 
+    backgroundColor: "#fff", 
+    borderRadius: 12, 
+    paddingHorizontal: 15, 
+    paddingVertical: 12, 
+    fontSize: 15, 
+    marginBottom: 15, 
+    borderWidth: 1, 
+    borderColor: "#ccc" 
+  },
+
+  botao: { 
+    backgroundColor: "#3D739C", 
+    paddingVertical: 14, 
+    borderRadius: 12,
+    alignItems: "center", 
+    marginTop: 10 
+  },
+
+  botaoTexto: { 
+    color: "#fff", 
+    fontSize: 16, 
+    fontWeight: "700" 
+  }
 });

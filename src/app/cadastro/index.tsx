@@ -1,5 +1,5 @@
-import { router, useFocusEffect } from "expo-router"; // <-- Adicionado useFocusEffect
-import { useState, useContext, useCallback } from "react"; // <-- Adicionado useCallback
+import { router, useFocusEffect } from "expo-router"; 
+import { useState, useContext, useCallback } from "react"; 
 import { Pressable, StatusBar, StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
 import { UsersContext } from "../../UsersContext";
 
@@ -56,7 +56,7 @@ export default function Cadastro() {
     }
 
     return (
-        // Envolvendo em ScrollView para telas menores (necessário, pois View não rola)
+        // Envolvendo em ScrollView para telas menores
         <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled"> 
             <View style={styles.container}>
                 <Text style={[styles.title, { color: '#fff' }]}>Cesta do amanhã</Text>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 40, // Adiciona padding para o topo
+        paddingTop: 40, 
     },
     title: {
         fontSize: 40,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         gap: 5,
         backgroundColor: '#fff',
         borderRadius: 25,
-        width: '90%', // Ajustei para 90% para caber melhor na tela
+        width: '90%',
         paddingBottom: 20,
     },
     textDadosNome: {
@@ -164,18 +164,18 @@ const styles = StyleSheet.create({
         marginLeft: 18,
         backgroundColor: '#D3D3D3',
         borderRadius: 20,
-        fontSize: 18, // Ajustei o tamanho da fonte para consistência
+        fontSize: 18, 
         width: '90%',
-        height: 50, // Altura fixa para consistência
+        height: 50, 
         paddingHorizontal: 15,
         margin: 10
     },
     button: {
-        alignSelf: 'center', // Centraliza o botão
+        alignSelf: 'center',
         backgroundColor: '#feb06a',
         width: '80%',
         marginTop: 20,
-        padding: 15, // Aumentei o padding
+        padding: 15, 
         borderRadius: 12,
         alignItems: 'center'
     },

@@ -35,7 +35,7 @@ export function InstituicoesProvider({ children }: any) {
     ]);
   }
 
-  // 🔥 FUNÇÃO ÚNICA E OFICIAL PARA REMOVER CAMPANHA
+  // FUNÇÃO ÚNICA E OFICIAL PARA REMOVER CAMPANHA
   function removeCampanha(instId: any, campanhaId: any) {
     setInsts(prev =>
       prev.map(inst =>

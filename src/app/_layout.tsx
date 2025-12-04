@@ -1,8 +1,8 @@
+import { InstituicoesProvider } from '@/InstContext';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import { UsersProvider } from "../UsersContext";
-import { InstituicoesProvider } from '@/InstContext';
 
 export default function Layout() {
   return (
@@ -102,7 +102,6 @@ export default function Layout() {
                   style={{ marginLeft: 16 }}
                   onPress={() => router.navigate('/login')}
                 />
-
               )
             }}
           />

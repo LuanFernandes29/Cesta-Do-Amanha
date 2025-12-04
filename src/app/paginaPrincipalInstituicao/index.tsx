@@ -28,8 +28,8 @@ export default function PaginaInstituicao() {
   const campanhas = Array.isArray(inst?.campanhas) ? inst.campanhas : [];
 
   const scrollRef = useRef<ScrollView | null>(null);
- 
- let currentScrollPos = 0;
+
+  let currentScrollPos = 0;
   const mostradas = campanhas.slice(0, 3);
 
   const scrollRight = () => {
@@ -157,7 +157,12 @@ export default function PaginaInstituicao() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "rgb(239, 237, 237)", paddingTop: 50 },
+  container: {
+    flex: 1,
+    backgroundColor: "rgb(239, 237, 237)",
+    paddingTop: 50
+  },
+
   cabecalho: {
     paddingHorizontal: 20,
     marginBottom: 30,
@@ -165,8 +170,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  titulo: { color: "#76A1C2", fontSize: 24, fontWeight: "700" },
-  subtitulo: { color: "#7A9EB8", fontSize: 12, fontWeight: "600", marginTop: 3 },
+
+  titulo: {
+    color: "#76A1C2",
+    fontSize: 24,
+    fontWeight: "700"
+  },
+
+  subtitulo: {
+    color: "#7A9EB8",
+    fontSize: 12,
+    fontWeight: "600",
+    marginTop: 3
+  },
+
   fotoContainer: {
     width: 60,
     height: 60,
@@ -175,7 +192,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#3D739C",
   },
-  perfilImage: { width: "100%", height: "100%", resizeMode: "cover" },
+
+  perfilImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover"
+  },
+
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -188,8 +211,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
   },
-  searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, fontSize: 14, color: "#021123" },
+
+  searchIcon: {
+    marginRight: 10
+  },
+
+  searchInput: {
+    flex: 1,
+    fontSize: 14,
+    color: "#021123"
+  },
+
   instituicoesHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -209,6 +241,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#7A9EB8"
   },
+
   card: {
     width: CARD_WIDTH,
     height: 350,
@@ -222,7 +255,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
   },
-  cardImage: { width: "100%", height: "100%", resizeMode: "cover" },
+
+  cardImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover"
+  },
+
   campanhaOverlay: {
     position: "absolute",
     bottom: 0,
@@ -230,9 +269,24 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: "rgba(0,0,0,0.35)",
   },
-  campanhaNome: { color: "#fff", fontSize: 18, fontWeight: "700" },
-  campanhaStatus: { color: "#eaeaea", fontSize: 13 },
-  campanhaValor: { color: "#fff", fontSize: 16, fontWeight: "700" },
+
+  campanhaNome: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "700"
+  },
+
+  campanhaStatus: {
+    color: "#eaeaea",
+    fontSize: 13
+  },
+
+  campanhaValor: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "700"
+  },
+
   arrowLeft: {
     position: "absolute",
     top: "40%",
@@ -242,6 +296,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 2,
   },
+
   arrowRight: {
     position: "absolute",
     top: "40%",
@@ -251,6 +306,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 2,
   },
+
+  textContainer: {
+  },
+
+  carrosselWrapper: {
+  },
+
+  carrosselContainer: {
+    paddingHorizontal: 20,
+  },
+
   botaoCadastrar: {
     backgroundColor: "#3D739C",
     marginHorizontal: 50,
@@ -259,11 +325,10 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
   },
+
   botaoCadastrarTexto: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "700",
   },
-
-
 });

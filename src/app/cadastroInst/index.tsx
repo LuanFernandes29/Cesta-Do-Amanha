@@ -2,7 +2,7 @@ import { useState, useContext, useCallback } from "react";
 import { Pressable, StatusBar, StyleSheet, Text, TextInput, View, Image, ScrollView, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { router, useFocusEffect } from "expo-router";
-import { InstituicoesContext } from "../../InstContext"; // Verifique se o caminho do seu Contexto está correto
+import { InstituicoesContext } from "../../InstContext"; 
 
 export default function Cadastro() {
 
@@ -17,7 +17,7 @@ export default function Cadastro() {
     const [cpfResp, setCpfResp] = useState("");
     const [foto, setFoto] = useState(null);
 
-    // 🌟 FUNÇÃO PARA ZERAR TODOS OS CAMPOS
+    // FUNÇÃO PARA ZERAR TODOS OS CAMPOS
     function resetForm() {
         setNome("");
         setEmail("");
@@ -29,7 +29,7 @@ export default function Cadastro() {
         console.log("Formulário de cadastro resetado!");
     }
 
-    // 💡 Hook para limpar o formulário quando a tela perde o foco (ao clicar em Voltar)
+    // Limpa o formulário quando a tela perde o foco (ao clicar em Voltar)
     // Isso garante que, ao sair desta tela, os dados preenchidos serão zerados.
     useFocusEffect(
         useCallback(() => {
@@ -74,7 +74,6 @@ export default function Cadastro() {
 
         console.log("🎉 INSTITUIÇÃO CADASTRADA:", newInst);
 
-        // 🚨 CORRIGIDO: Alterado de "/principal" para "/paginaPrincipal"
         router.push("/login"); 
     }
 
@@ -148,8 +147,17 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, // Ajusta para a StatusBar no Android
     },
-    title: { fontSize: 40, textAlign: 'center', fontWeight: 'bold', color: '#fff' },
-    subTitle:{ fontSize: 15, textAlign: 'center', color: '#fff' },
+    title: { 
+        fontSize: 40, 
+        textAlign: 'center', 
+        fontWeight: 'bold', 
+        color: '#feb06a' 
+    },
+    subTitle:{ 
+        fontSize: 15, 
+        textAlign: 'center', 
+        color: '#fff' 
+    },
     branco:{ 
         marginTop: 20, 
         gap: 5, 
@@ -158,14 +166,24 @@ const styles = StyleSheet.create({
         width: '90%', 
         paddingBottom: 20, 
         paddingHorizontal: 10,
-        elevation: 5, // Adiciona sombra no Android
-        shadowColor: '#000', // Adiciona sombra no iOS
+        elevation: 5, 
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
     },
-    textDadosNome:{ marginLeft: 14, marginTop: 20, marginBottom: -10, fontWeight: 'bold' },
-    textDados:{ marginLeft: 14, marginTop: 10, marginBottom: -10, fontWeight: 'bold' },
+    textDadosNome:{ 
+        marginLeft: 14, 
+        marginTop: 20, 
+        marginBottom: -10, 
+        fontWeight: 'bold' 
+    },
+    textDados:{ 
+        marginLeft: 14, 
+        marginTop: 10, 
+        marginBottom: -10, 
+        fontWeight: 'bold' 
+    },
     inputText: { 
         marginLeft: 8, 
         backgroundColor: '#D3D3D3', 
@@ -190,7 +208,7 @@ const styles = StyleSheet.create({
         width: 100, 
         height: 100, 
         alignSelf: "center", 
-        borderRadius: 50, // Forma de círculo
+        borderRadius: 50,
         marginTop: 10,
         borderWidth: 2,
         borderColor: '#457b9d'
@@ -204,5 +222,9 @@ const styles = StyleSheet.create({
         borderRadius: 12, 
         alignItems: 'center' 
     },
-    buttonText:{ fontSize: 20, fontWeight: "bold", color: "#fff" }
+    buttonText:{ 
+        fontSize: 20, 
+        fontWeight: "bold", 
+        color: "#fff" 
+    }
 });

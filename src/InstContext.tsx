@@ -4,54 +4,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const InstituicoesContext = createContext({
   insts: [],
   addInst: (inst: any) => {},
-<<<<<<< HEAD
-=======
   addCampanha: (instId: any, campanha: any) => {},
   removeCampanha: (instId: any, campanhaId: any) => {},
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   getById: (id: any) => null,
 });
 
 export function InstituicoesProvider({ children }: any) {
   const [insts, setInsts] = useState<any[]>([]);
 
-<<<<<<< HEAD
-  // carrega do storage ao iniciar
-  useEffect(() => {
-    async function load() {
-      try {
-        const saved = await AsyncStorage.getItem("@insts");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          console.log("🔥 INSTS CARREGADAS DO STORAGE:", parsed);
-          setInsts(parsed);
-        } else {
-          console.log("🔍 Nenhuma instituicao no storage ainda.");
-        }
-      } catch (err) {
-        console.warn("Erro ao carregar insts:", err);
-      }
-=======
   useEffect(() => {
     async function load() {
       const saved = await AsyncStorage.getItem("@insts");
       if (saved) setInsts(JSON.parse(saved));
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
     }
     load();
   }, []);
 
-<<<<<<< HEAD
-  // salva sempre que mudar
-  useEffect(() => {
-    AsyncStorage.setItem("@insts", JSON.stringify(insts))
-      .then(() => console.log("💾 INSTS SALVAS:", insts))
-      .catch(err => console.warn("Erro ao salvar insts:", err));
-  }, [insts]);
-
-  function addInst(inst: any) {
-    setInsts(prev => [...prev, inst]);
-=======
   useEffect(() => {
     AsyncStorage.setItem("@insts", JSON.stringify(insts));
   }, [insts]);
@@ -91,7 +59,6 @@ export function InstituicoesProvider({ children }: any) {
           : i
       )
     );
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   }
 
   function getById(id: any) {
@@ -99,13 +66,6 @@ export function InstituicoesProvider({ children }: any) {
   }
 
   return (
-<<<<<<< HEAD
-    <InstituicoesContext.Provider value={{ insts, addInst, getById }}>
-      {children}
-    </InstituicoesContext.Provider>
-  );
-}
-=======
     <InstituicoesContext.Provider
       value={{ insts, addInst, addCampanha, removeCampanha, getById }}
     >
@@ -113,4 +73,3 @@ export function InstituicoesProvider({ children }: any) {
     </InstituicoesContext.Provider>
   );
 }
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9

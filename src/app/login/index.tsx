@@ -1,12 +1,6 @@
 import { useState, useContext } from "react";
 import { router } from "expo-router";
 import { Pressable, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
-<<<<<<< HEAD
-import { UsersContext } from "../../UsersContext";
-
-export default function Login() {
-    const { login } = useContext(UsersContext);
-=======
 
 import { UsersContext } from "../../UsersContext";
 import { InstituicoesContext } from "../../InstContext";
@@ -14,22 +8,11 @@ import { InstituicoesContext } from "../../InstContext";
 export default function Login() {
     const { login } = useContext(UsersContext);
     const { insts } = useContext(InstituicoesContext);
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
     function VerifyLogin() {
-<<<<<<< HEAD
-        const ok = login(email, senha);
-
-        if (ok) {
-            router.navigate("/paginaPrincipal");
-        } else {
-            alert("Email ou senha incorretos!");
-        }
-    }
-=======
         const user = login(email, senha, insts);
 
         if (!user) {
@@ -50,21 +33,14 @@ export default function Login() {
         router.navigate("/paginaPrincipal");
     }
     console.log("INSTS:", insts);
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Cesta do amanhã</Text>
             <Text style={styles.subTitle}>Entrar</Text>
-<<<<<<< HEAD
-            <StatusBar/>
-            <View style={styles.branco}>
-                <Text style={styles.textDados}>EMAIL:</Text>
-=======
             <StatusBar />
             <View style={styles.branco}>
                 <Text style={styles.textDados}>EMAIL</Text>
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
                 <TextInput
                     style={styles.inputText}
                     keyboardType="email-address"
@@ -72,11 +48,7 @@ export default function Login() {
                     onChangeText={setEmail}
                 />
 
-<<<<<<< HEAD
-                <Text style={styles.textDados}>SENHA:</Text>
-=======
                 <Text style={styles.textDados}>SENHA</Text>
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
                 <TextInput
                     style={styles.inputText}
                     secureTextEntry
@@ -91,10 +63,6 @@ export default function Login() {
     );
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#457b9d" },
     title: { fontSize: 40, fontWeight: "bold", color: "#fff" },

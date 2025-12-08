@@ -11,26 +11,6 @@ import {
   Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-<<<<<<< HEAD
-import { router } from "expo-router";
-import { InstituicoesContext } from "../../InstContext";
-
-const { width } = Dimensions.get("window");
-const CARD_WIDTH = width * 0.8;
-const CARD_MARGIN = 20;
-
-const FotoPerfilMock = () => (
-  <View style={styles.fotoContainer}>
-    <Image source={require("../../assets/fototeste.jpg")} style={styles.perfilImage} />
-  </View>
-);
-
-export default function PaginaInstituicao() {
-  const { campanhas } = useContext(InstituicoesContext);
-  const scrollRef = useRef<ScrollView | null>(null);
-  let currentScrollPos = 0;
-
-=======
 import { router, useLocalSearchParams } from "expo-router";
 import { InstituicoesContext } from "../../InstContext";
 
@@ -50,7 +30,6 @@ export default function PaginaInstituicao() {
   const scrollRef = useRef<ScrollView | null>(null);
 
   let currentScrollPos = 0;
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   const mostradas = campanhas.slice(0, 3);
 
   const scrollRight = () => {
@@ -70,11 +49,7 @@ export default function PaginaInstituicao() {
   function abrirCampanha(id: any) {
     router.push({
       pathname: "/campanhaDetalhes",
-<<<<<<< HEAD
-      params: { id: String(id) },
-=======
       params: { id: String(id), instId: String(inst?.id) },
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
     });
   }
 
@@ -82,19 +57,6 @@ export default function PaginaInstituicao() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <StatusBar barStyle="dark-content" backgroundColor="#e9e6e6" />
 
-<<<<<<< HEAD
-      {/* --- CABEÇALHO --- */}
-      <View style={styles.cabecalho}>
-        <View style={styles.textContainer}>
-          <Text style={styles.titulo}>Olá, Instituição</Text>
-          <Text style={styles.subtitulo}>GERENCIE SUAS CAMPANHAS</Text>
-        </View>
-
-        <FotoPerfilMock />
-      </View>
-
-      {/* --- SEARCH BAR --- */}
-=======
       <View style={styles.cabecalho}>
         <View style={styles.textContainer}>
           <Text style={styles.titulo}>Olá, {inst?.nome ?? "Instituição"}</Text>
@@ -111,7 +73,6 @@ export default function PaginaInstituicao() {
         </View>
       </View>
 
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
       <View style={styles.searchContainer}>
         <Ionicons name="search" size={20} color="#7A9EB8" style={styles.searchIcon} />
         <TextInput
@@ -121,15 +82,6 @@ export default function PaginaInstituicao() {
         />
       </View>
 
-<<<<<<< HEAD
-      {/* Título */}
-      <View style={styles.instituicoesHeader}>
-        <Text style={styles.instituicoesTitulo}>Minhas Campanhas Ativas</Text>
-        <Text style={styles.verTudo}>Ver tudo</Text>
-      </View>
-
-      {/* --- CARROSSEL --- */}
-=======
       <View style={styles.instituicoesHeader}>
         <Text style={styles.instituicoesTitulo}>Campanhas Ativas</Text>
 
@@ -145,7 +97,6 @@ export default function PaginaInstituicao() {
         </TouchableOpacity>
       </View>
 
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
       <View style={styles.carrosselWrapper}>
         <ScrollView
           horizontal
@@ -154,11 +105,7 @@ export default function PaginaInstituicao() {
           ref={scrollRef}
           scrollEnabled={false}
         >
-<<<<<<< HEAD
-          {mostradas.map(item => (
-=======
           {mostradas.map((item: any) => (
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
             <TouchableOpacity
               key={item.id}
               style={styles.card}
@@ -167,19 +114,6 @@ export default function PaginaInstituicao() {
               {item.foto ? (
                 <Image source={{ uri: item.foto }} style={styles.cardImage} />
               ) : (
-<<<<<<< HEAD
-                <Image
-                  source={require("../../assets/instituicao.png")}
-                  style={styles.cardImage}
-                />
-              )}
-
-              {/* Info da campanha */}
-              <View style={styles.campanhaInfo}>
-                <Text style={styles.campanhaNome}>{item.nome}</Text>
-                <Text style={styles.campanhaStatus}>Donando</Text>
-                <Text style={styles.campanhaValor}>${item.valor ?? "0,000"}</Text>
-=======
                 <Image source={require("../../assets/instituicao.png")} style={styles.cardImage} />
               )}
 
@@ -187,7 +121,6 @@ export default function PaginaInstituicao() {
                 <Text style={styles.campanhaNome}>{item.nome}</Text>
                 <Text style={styles.campanhaStatus}>Doando agora</Text>
                 <Text style={styles.campanhaValor}>R$ {item.valor ?? "0,00"}</Text>
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
               </View>
             </TouchableOpacity>
           ))}
@@ -199,10 +132,6 @@ export default function PaginaInstituicao() {
           )}
         </ScrollView>
 
-<<<<<<< HEAD
-        {/* Botões laterais */}
-=======
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
         <TouchableOpacity style={styles.arrowLeft} onPress={scrollLeft}>
           <Ionicons name="chevron-back-circle" size={30} color="#3D739C" />
         </TouchableOpacity>
@@ -211,8 +140,6 @@ export default function PaginaInstituicao() {
           <Ionicons name="chevron-forward-circle" size={30} color="#3D739C" />
         </TouchableOpacity>
       </View>
-<<<<<<< HEAD
-=======
 
       <TouchableOpacity
         style={styles.botaoCadastrar}
@@ -225,7 +152,6 @@ export default function PaginaInstituicao() {
       >
         <Text style={styles.botaoCadastrarTexto}>Cadastrar Nova Campanha</Text>
       </TouchableOpacity>
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
     </ScrollView>
   );
 }
@@ -234,11 +160,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "rgb(239, 237, 237)",
-<<<<<<< HEAD
-    paddingTop: 50,
-=======
     paddingTop: 50
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   },
 
   cabecalho: {
@@ -250,27 +172,16 @@ const styles = StyleSheet.create({
   },
 
   titulo: {
-<<<<<<< HEAD
-    color: "rgb(118, 161, 194)",
-    fontSize: 24,
-    fontWeight: "700",
-=======
     color: "#76A1C2",
     fontSize: 24,
     fontWeight: "700"
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   },
 
   subtitulo: {
     color: "#7A9EB8",
     fontSize: 12,
     fontWeight: "600",
-<<<<<<< HEAD
-    marginTop: 3,
-    letterSpacing: 0.5,
-=======
     marginTop: 3
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   },
 
   fotoContainer: {
@@ -285,11 +196,7 @@ const styles = StyleSheet.create({
   perfilImage: {
     width: "100%",
     height: "100%",
-<<<<<<< HEAD
-    resizeMode: "cover",
-=======
     resizeMode: "cover"
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   },
 
   searchContainer: {
@@ -305,10 +212,6 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
   },
 
-<<<<<<< HEAD
-  searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, fontSize: 14, color: "#021123" },
-=======
   searchIcon: {
     marginRight: 10
   },
@@ -318,7 +221,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#021123"
   },
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 
   instituicoesHeader: {
     flexDirection: "row",
@@ -326,26 +228,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     marginBottom: 15,
-<<<<<<< HEAD
-    marginTop: 10,
-=======
     marginTop: 10
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   },
 
   instituicoesTitulo: {
     fontSize: 27.3,
     fontWeight: "700",
-<<<<<<< HEAD
-    color: "#3D739C",
-  },
-
-  verTudo: { fontSize: 12, color: "#7A9EB8" },
-
-  carrosselWrapper: { position: "relative", marginBottom: 20 },
-
-  carrosselContainer: { paddingHorizontal: 20, paddingVertical: 10 },
-=======
     color: "#3D739C"
   },
 
@@ -353,22 +241,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#7A9EB8"
   },
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 
   card: {
     width: CARD_WIDTH,
     height: 350,
-<<<<<<< HEAD
-    borderRadius: 15,
-    overflow: "hidden",
-    marginRight: CARD_MARGIN,
-    backgroundColor: "#fff",
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 6,
-=======
     borderRadius: 18,
     overflow: "hidden",
     marginHorizontal: CARD_MARGIN / 2,
@@ -378,33 +254,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   },
 
   cardImage: {
     width: "100%",
     height: "100%",
-<<<<<<< HEAD
-    resizeMode: "cover",
-  },
-
-  campanhaInfo: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 10,
-    backgroundColor: "rgba(255,255,255,0.85)",
-  },
-
-  campanhaNome: { fontSize: 17, fontWeight: "700", color: "#000" },
-  campanhaStatus: { fontSize: 13, color: "#555" },
-  campanhaValor: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#3D739C",
-    marginTop: 2,
-=======
     resizeMode: "cover"
   },
 
@@ -431,7 +285,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "700"
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   },
 
   arrowLeft: {
@@ -439,11 +292,7 @@ const styles = StyleSheet.create({
     top: "40%",
     left: 5,
     zIndex: 10,
-<<<<<<< HEAD
-    backgroundColor: "rgba(255,255,255,0.7)",
-=======
     backgroundColor: "rgba(255,255,255,0.8)",
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
     borderRadius: 20,
     padding: 2,
   },
@@ -453,12 +302,6 @@ const styles = StyleSheet.create({
     top: "40%",
     right: 5,
     zIndex: 10,
-<<<<<<< HEAD
-    backgroundColor: "rgba(255,255,255,0.7)",
-    borderRadius: 20,
-    padding: 2,
-  },
-=======
     backgroundColor: "rgba(255,255,255,0.8)",
     borderRadius: 20,
     padding: 2,
@@ -488,5 +331,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
   },
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 });

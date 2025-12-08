@@ -11,7 +11,11 @@
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
     "@react-native-async-storage/async-storage": "2.2.0",
+<<<<<<< HEAD
     "@react-navigation/drawer": "^7.7.5",
+=======
+    "@react-navigation/drawer": "^7.7.1",
+>>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
     "@react-navigation/native": "^7.1.8",
     "expo": "~54.0.12",
     "expo-constants": "~18.0.9",

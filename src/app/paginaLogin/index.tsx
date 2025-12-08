@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> d59fae3bdf757a6fcc009e5e5c31c7c13074d61b
+>>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 import { Botao } from "@/componentes/Botao";
 import { router } from "expo-router";
 import { Text, View, StyleSheet } from "react-native";
@@ -27,6 +34,10 @@ const styles = StyleSheet.create({
         fontSize: 55,
         textAlign: 'center',
         fontWeight: 'bold',
+<<<<<<< HEAD
     },
    
+=======
+    }
+>>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 })

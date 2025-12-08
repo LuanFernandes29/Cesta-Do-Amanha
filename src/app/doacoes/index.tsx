@@ -184,5 +184,9 @@ const styles = StyleSheet.create({
   mailButtonText: {
     textDecorationLine: "underline",
     color: "#2B6A80",
+<<<<<<< HEAD
   },
+=======
+  }
+>>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 });

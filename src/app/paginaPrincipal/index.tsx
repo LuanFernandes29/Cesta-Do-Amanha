@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useRef, useContext } from "react";
 import {
   View,
@@ -13,6 +14,23 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { InstituicoesContext } from "../../InstContext"; // caminho conforme seu print
+=======
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import React, { useContext, useRef } from "react";
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { InstituicoesContext } from "../../InstContext";
+>>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.8;
@@ -29,7 +47,10 @@ export default function PaginaPrincipal() {
   const scrollRef = useRef<ScrollView | null>(null);
   let currentScrollPos = 0;
 
+<<<<<<< HEAD
   // pegamos até 3 instituições (se houver)
+=======
+>>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
   const mostradas = insts.slice(0, 3);
 
   const scrollRight = () => {
@@ -47,7 +68,10 @@ export default function PaginaPrincipal() {
   };
 
   function abrirInstituicao(id: any) {
+<<<<<<< HEAD
     // envia id para a rota da instituição
+=======
+>>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
     router.push({
       pathname: "/instituicaoDoador",
       params: { id: String(id) },
@@ -176,6 +200,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc" 
   },
   
+<<<<<<< HEAD
   searchIcon: { marginRight: 10 },
   searchInput: { flex: 1, fontSize: 14, color: "#021123" },
   instituicoesHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, marginBottom: 15, marginTop: 10 },
@@ -190,3 +215,101 @@ const styles = StyleSheet.create({
   arrowLeft: { position: "absolute", top: "40%", left: 5, zIndex: 10, backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 20, padding: 2 },
   arrowRight: { position: "absolute", top: "40%", right: 5, zIndex: 10, backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 20, padding: 2 },
 });
+=======
+  searchIcon: { 
+    marginRight: 10 
+  },
+
+  searchInput: { 
+    flex: 1, 
+    fontSize: 14, 
+    color: "#021123" 
+  },
+
+  instituicoesHeader: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    paddingHorizontal: 20, 
+    marginBottom: 15, 
+    marginTop: 10 
+  },
+
+  instituicoesTitulo: { 
+    fontSize: 27.3, 
+    fontWeight: "700", 
+    color: "#3D739C" 
+  },
+
+  verTudo: { 
+    fontSize: 12, 
+    color: "#7A9EB8" 
+  },
+
+  carrosselWrapper: { 
+    position: "relative", 
+    marginBottom: 20 
+  },
+
+  carrosselContainer: { 
+    paddingHorizontal: 20, 
+    paddingVertical: 10 
+  },
+
+  card: { 
+    width: CARD_WIDTH, 
+    height: 350, 
+    borderRadius: 15, 
+    overflow: "hidden", 
+    marginRight: CARD_MARGIN, 
+    backgroundColor: "#fff", 
+    elevation: 5, 
+    shadowColor: "#000", 
+    shadowOpacity: 0.2, 
+    shadowOffset: { width: 0, height: 4 }, 
+    shadowRadius: 6 
+  },
+
+  cardImage: { 
+    width: "100%", 
+    height: "100%", 
+    resizeMode: "cover" 
+  },
+
+  cardOverlay: { 
+    position: "absolute", 
+    bottom: 0, 
+    left: 0, 
+    right: 0, 
+    padding: 10, 
+    backgroundColor: "rgba(0,0,0,0.35)" 
+  },
+
+  cardTitle: { 
+    color: "#fff", 
+    fontSize: 18, 
+    fontWeight: "700" 
+  },
+
+  arrowLeft: { 
+    position: "absolute", 
+    top: "40%", 
+    left: 5, 
+    zIndex: 10, 
+    backgroundColor: "rgba(255,255,255,0.7)", 
+    borderRadius: 20, 
+    padding: 2 
+  },
+
+  arrowRight: { 
+    position: "absolute", 
+    top: "40%", 
+    right: 5, 
+    zIndex: 10, 
+    backgroundColor: "rgba(255,255,255,0.7)", 
+    borderRadius: 20, 
+    padding: 2 
+  }
+
+});
+>>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9

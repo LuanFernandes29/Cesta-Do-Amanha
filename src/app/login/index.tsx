@@ -25,7 +25,7 @@ export default function Login() {
             <Text style={styles.subTitle}>Entrar</Text>
             <StatusBar/>
             <View style={styles.branco}>
-                <Text style={styles.textDados}>EMAIL</Text>
+                <Text style={styles.textDados}>EMAIL:</Text>
                 <TextInput
                     style={styles.inputText}
                     keyboardType="email-address"
@@ -33,7 +33,7 @@ export default function Login() {
                     onChangeText={setEmail}
                 />
 
-                <Text style={styles.textDados}>SENHA</Text>
+                <Text style={styles.textDados}>SENHA:</Text>
                 <TextInput
                     style={styles.inputText}
                     secureTextEntry

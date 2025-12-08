@@ -37,13 +37,14 @@ export default function Cadastro() {
             cep,
             cpfResp,
             foto: foto || null, // FOTO OPCIONAL
+            
         };
 
         addInst(newInst);
 
         console.log("🎉 INSTITUIÇÃO CADASTRADA:", newInst);
 
-        router.push("/principal");
+        router.push("/login");
     }
 
     return (

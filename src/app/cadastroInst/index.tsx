@@ -79,7 +79,7 @@ export default function Cadastro() {
 
     return (
         // Envolvendo o conteúdo em ScrollView para permitir rolagem em telas pequenas
-        <ScrollView contentContainerContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled"> 
+        <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled"> 
             <View style={styles.container}>
                 <Text style={styles.title}>Cesta do amanhã</Text>
                 <Text style={styles.subTitle}>Insira seus dados e junte-se {"\n"}a nós</Text>

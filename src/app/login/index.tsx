@@ -3,17 +3,20 @@ import { router } from "expo-router";
 import { Pressable, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { UsersContext } from "../../UsersContext";
-import { InstituicoesContext } from "../../InstContext";
+// A importação de InstituicoesContext não é necessária aqui.
+// import { InstituicoesContext } from "../../InstContext"; 
 
 export default function Login() {
     const { login } = useContext(UsersContext);
-    const { insts } = useContext(InstituicoesContext);
+    // ✅ Removida variável 'insts' desnecessária, o UsersProvider já a tem.
+    // const { insts } = useContext(InstituicoesContext);
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
     function VerifyLogin() {
-        const user = login(email, senha, insts);
+        // ✅ CORREÇÃO: Chama login apenas com email e senha
+        const user = login(email, senha);
 
         if (!user) {
             alert("Email ou senha incorretos!");
@@ -24,7 +27,7 @@ export default function Login() {
         if (user.tipo === "instituicao") {
             router.push({
                 pathname: "/paginaPrincipalInstituicao",
-                params: { instId: String(user.id) }  // 🔥 AQUI AGORA ESTÁ CERTO
+                params: { instId: String(user.id) }
             });
             return;
         }
@@ -32,7 +35,6 @@ export default function Login() {
         // SE FOR VOLUNTÁRIO
         router.navigate("/paginaPrincipal");
     }
-    console.log("INSTS:", insts);
 
     return (
         <View style={styles.container}>
@@ -64,12 +66,51 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#457b9d" },
-    title: { fontSize: 40, fontWeight: "bold", color: "#fff" },
-    subTitle: { fontSize: 15, color: "#fff", marginBottom: 20 },
-    branco: { backgroundColor: "#fff", padding: 20, borderRadius: 20, width: "85%" },
-    textDados: { marginLeft: 10, marginTop: 10 },
-    inputText: { backgroundColor: "#D3D3D3", borderRadius: 10, padding: 10, fontSize: 18, marginTop: 5 },
-    button: { backgroundColor: "#feb06a", padding: 12, marginTop: 20, borderRadius: 10, alignItems: "center" },
-    buttonText: { color: "#fff", fontWeight: "bold", fontSize: 20 },
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#457b9d"
+    },
+    title: {
+        fontSize: 40,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#feb06a'
+    },
+    subTitle: {
+        fontSize: 15,
+        color: "#fff",
+        marginBottom: 20
+    },
+
+    branco: {
+        backgroundColor: "#fff",
+        padding: 20,
+        borderRadius: 20,
+        width: "85%"
+    },
+    textDados: {
+        marginLeft: 10,
+        marginTop: 10
+    },
+    inputText: {
+        backgroundColor: "#D3D3D3",
+        borderRadius: 10,
+        padding: 10,
+        fontSize: 18,
+        marginTop: 5
+    },
+    button: {
+        backgroundColor: "#feb06a",
+        padding: 12,
+        marginTop: 20,
+        borderRadius: 10,
+        alignItems: "center"
+    },
+    buttonText: {
+        color: "#fff",
+        fontWeight: "bold",
+        fontSize: 20
+    },
 });

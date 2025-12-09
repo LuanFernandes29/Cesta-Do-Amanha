@@ -59,8 +59,8 @@ export default function Cadastro() {
         // Envolvendo em ScrollView para telas menores
         <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled"> 
             <View style={styles.container}>
-                <Text style={[styles.title, { color: '#fff' }]}>Cesta do amanhã</Text>
-                <Text style={[styles.subTitle, { color: '#fff' }]}>Insira seus dados e junte-se {"\n"}a nós</Text>
+                <Text style={styles.title }>Cesta do amanhã</Text>
+                <Text style={styles.subTitle}>Insira seus dados e junte-se {"\n"}a nós</Text>
                 <StatusBar />
                 
                 <View style={styles.branco}>
@@ -133,14 +133,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 40, 
     },
-    title: {
-        fontSize: 40,
-        textAlign: 'center',
-        fontWeight: 'bold',
+    title: { 
+        fontSize: 40, 
+        textAlign: 'center', 
+        fontWeight: 'bold', 
+        color: '#feb06a' 
     },
     subTitle: {
         fontSize: 15,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#f1faee'
     },
     branco: {
         marginTop: 20,

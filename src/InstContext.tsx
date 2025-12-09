@@ -1,16 +1,29 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const InstituicoesContext = createContext({
+// Definição de Tipos para TSX
+type Campanha = { id: string; titulo: string;[key: string]: any };
+type Instituicao = { id: string; email: string; senha: string; campanhas: Campanha[];[key: string]: any };
+type InstContextType = {
+  insts: Instituicao[];
+  // ✅ CORREÇÃO: addInst agora retorna a Instituicao recém-criada
+  addInst: (inst: Omit<Instituicao, 'id' | 'campanhas'>) => Instituicao;
+  addCampanha: (instId: string, campanha: Campanha) => void;
+  removeCampanha: (instId: string, campanhaId: string) => void;
+  getById: (id: string) => Instituicao | null;
+};
+
+// Valor inicial do Context
+export const InstituicoesContext = createContext<InstContextType>({
   insts: [],
-  addInst: (inst: any) => {},
-  addCampanha: (instId: any, campanha: any) => {},
-  removeCampanha: (instId: any, campanhaId: any) => {},
-  getById: (id: any) => null,
+  addInst: () => ({} as Instituicao), // Valor mock para o retorno
+  addCampanha: () => { },
+  removeCampanha: () => { },
+  getById: () => null,
 });
 
-export function InstituicoesProvider({ children }: any) {
-  const [insts, setInsts] = useState<any[]>([]);
+export function InstituicoesProvider({ children }: { children: ReactNode }) {
+  const [insts, setInsts] = useState<Instituicao[]>([]);
 
   useEffect(() => {
     async function load() {
@@ -21,37 +34,44 @@ export function InstituicoesProvider({ children }: any) {
   }, []);
 
   useEffect(() => {
+    // Salva no AsyncStorage sempre que 'insts' for atualizado
     AsyncStorage.setItem("@insts", JSON.stringify(insts));
   }, [insts]);
 
-  function addInst(inst: any) {
+  // ✅ Função Corrigida: Retorna a nova instituição para o fluxo de cadastro/login
+  function addInst(inst: Omit<Instituicao, 'id' | 'campanhas'>): Instituicao {
+    const newInst: Instituicao = {
+      ...inst,
+      id: Date.now().toString(), // Cria ID único (string)
+      campanhas: []
+    };
+
     setInsts(prev => [
       ...prev,
-      { 
-        ...inst, 
-        id: Date.now().toString(), // Cria ID único
-        campanhas: [] 
-      }
+      newInst
     ]);
+
+    // Retorna o objeto completo imediatamente
+    return newInst;
   }
 
   // FUNÇÃO ÚNICA E OFICIAL PARA REMOVER CAMPANHA
-  function removeCampanha(instId: any, campanhaId: any) {
+  function removeCampanha(instId: string, campanhaId: string) {
     setInsts(prev =>
       prev.map(inst =>
         String(inst.id) === String(instId)
           ? {
-              ...inst,
-              campanhas: inst.campanhas.filter(
-                c => String(c.id) !== String(campanhaId)
-              ),
-            }
+            ...inst,
+            campanhas: inst.campanhas.filter(
+              c => String(c.id) !== String(campanhaId)
+            ),
+          }
           : inst
       )
     );
   }
 
-  function addCampanha(instId: any, campanha: any) {
+  function addCampanha(instId: string, campanha: Campanha) {
     setInsts(prev =>
       prev.map(i =>
         String(i.id) === String(instId)
@@ -61,7 +81,7 @@ export function InstituicoesProvider({ children }: any) {
     );
   }
 
-  function getById(id: any) {
+  function getById(id: string): Instituicao | null {
     return insts.find(i => String(i.id) === String(id)) || null;
   }
 

@@ -24,6 +24,15 @@ const FotoPerfilMock = () => (
   </View>
 );
 
+// Função para abrir a instituição (estava faltando na versão conflitante)
+const abrirInstituicao = (id: number) => {
+  // envia id para a rota da instituição
+  router.push({
+    pathname: "/instituicaoDoador",
+    params: { id: String(id) },
+  });
+};
+
 export default function PaginaPrincipal() {
   const { insts } = useContext(InstituicoesContext);
   const scrollRef = useRef<ScrollView | null>(null);
@@ -43,14 +52,7 @@ export default function PaginaPrincipal() {
     currentScrollPos -= CARD_WIDTH + CARD_MARGIN;
     if (currentScrollPos < 0) currentScrollPos = 0;
     scrollRef.current?.scrollTo({ x: currentScrollPos, animated: true });
-    // envia id para a rota da instituição
-=======
->>>>>>> a78da529fadc6f99c52f7ed6701962217f7438b9
-    router.push({
-      pathname: "/instituicaoDoador",
-      params: { id: String(id) },
-    });
-  }
+  };
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>

@@ -43,7 +43,9 @@ export default function CampanhaDetalhes() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.navigate("/paginaPrincipalInstituicao")}>/
+        <TouchableOpacity 
+          // Linha corrigida: O caractere '/' foi removido aqui.
+          onPress={() => router.replace("/paginaPrincipalInstituicao")}>
           <Ionicons name="arrow-back" size={26} color="#3D739C" />
         </TouchableOpacity>
 
@@ -164,4 +166,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
   }
-});
+});   

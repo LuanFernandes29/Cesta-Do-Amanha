@@ -23,6 +23,7 @@ export default function Layout() {
           <Drawer.Screen name="paginaPrincipalInstituicao/index" options={{ title: 'Instituição', headerShown: true }}/>
           <Drawer.Screen name="cadastrarCampanha/index" options={{ title: '', headerShown: true, drawerItemStyle: { display: 'none'} }}/>
           <Drawer.Screen name="todasCampanhasInstituicao/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none'} }}/>
+          <Drawer.Screen name="campanhaDetalhes/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none'} }}/>
 
           <Drawer.Screen
             name='paginaLogin/index'
@@ -104,6 +105,7 @@ export default function Layout() {
               )
             }}
           />
+
         </Drawer>
       </InstituicoesProvider>
     </UsersProvider>

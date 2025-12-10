@@ -19,6 +19,7 @@ type UsersContextType = {
   addUser: (data: Omit<User, "id" | "tipo">) => Promise<void>;
   login: (email: string, senha: string) => User | null;
   logout: () => void;
+  updateUser: (user: User) => Promise<void>;
 };
 
 export const UsersContext = createContext<UsersContextType>({
@@ -27,6 +28,7 @@ export const UsersContext = createContext<UsersContextType>({
   addUser: async () => {},
   login: () => null,
   logout: () => {},
+  updateUser: async () => {},
 });
 
 export function UsersProvider({ children }: { children: React.ReactNode }) {
@@ -45,7 +47,13 @@ export function UsersProvider({ children }: { children: React.ReactNode }) {
         tipo: "instituicao",
       }));
 
-      setUsers([...volunteers, ...instUsers]);
+      const all = [...volunteers, ...instUsers];
+      setUsers(all);
+
+      if (currentUser) {
+        const atualizado = all.find(u => String(u.id) === String(currentUser.id));
+        if (atualizado) setCurrentUser(atualizado);
+      }
     }
 
     loadAll();
@@ -58,24 +66,39 @@ export function UsersProvider({ children }: { children: React.ReactNode }) {
       tipo: "voluntario",
     };
 
-    const volunteers = users.filter(u => u.tipo === "voluntario");
-    const updated = [...volunteers, newUser];
+    const stored = await AsyncStorage.getItem("@users");
+    const volunteers: User[] = stored ? JSON.parse(stored) : [];
 
-    await AsyncStorage.setItem("@users", JSON.stringify(updated));
-    setUsers([...updated, ...users.filter(u => u.tipo === "instituicao")]);
+    const updatedVolunteers = [...volunteers, newUser];
+
+    await AsyncStorage.setItem("@users", JSON.stringify(updatedVolunteers));
+    setUsers(prev => [...updatedVolunteers, ...prev.filter(u => u.tipo === "instituicao")]);
     setCurrentUser(newUser);
   }
 
   function login(email: string, senha: string) {
-    const found = users.find(
-      u => u.email === email && u.senha === senha
-    );
-
+    const found = users.find(u => u.email === email && u.senha === senha);
     if (found) {
       setCurrentUser(found);
       return found;
     }
     return null;
+  }
+
+  async function updateUser(user: User) {
+    setCurrentUser(user);
+
+    if (user.tipo === "voluntario") {
+      const stored = await AsyncStorage.getItem("@users");
+      const volunteers: User[] = stored ? JSON.parse(stored) : [];
+
+      const updated = volunteers.map(u =>
+        u.id === user.id ? user : u
+      );
+
+      await AsyncStorage.setItem("@users", JSON.stringify(updated));
+      setUsers(prev => [...updated, ...prev.filter(u => u.tipo === "instituicao")]);
+    }
   }
 
   function logout() {
@@ -84,7 +107,7 @@ export function UsersProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <UsersContext.Provider
-      value={{ users, currentUser, addUser, login, logout }}
+      value={{ users, currentUser, addUser, login, logout, updateUser }}
     >
       {children}
     </UsersContext.Provider>

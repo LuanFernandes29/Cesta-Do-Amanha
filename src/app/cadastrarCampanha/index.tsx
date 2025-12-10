@@ -62,6 +62,10 @@ export default function CadastrarCampanha() {
     };
 
     addCampanha(currentUser.id, novaCampanha);
+    setNome("");
+    setDescricao("");
+    setValor("");
+    setFoto(null);
     router.replace("/paginaPrincipalInstituicao");
   }
 

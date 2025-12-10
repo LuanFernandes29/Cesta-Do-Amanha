@@ -47,7 +47,10 @@ export default function PaginaInstituicao() {
   function abrirCampanha(id: any) {
     router.push({
       pathname: "/campanhaDetalhes",
-      params: { id: String(id) },
+      params: {
+        id: String(id),
+        instId: String(currentUser?.id),
+      },
     });
   }
 
@@ -67,7 +70,10 @@ export default function PaginaInstituicao() {
           {currentUser.foto ? (
             <Image source={{ uri: currentUser.foto }} style={styles.perfilImage} />
           ) : (
-            <Image source={require("../../assets/instituicao.png")} style={styles.perfilImage} />
+            <Image
+              source={require("../../assets/instituicao.png")}
+              style={styles.perfilImage}
+            />
           )}
         </View>
       </View>
@@ -96,37 +102,69 @@ export default function PaginaInstituicao() {
           ref={scrollRef}
           scrollEnabled={false}
         >
-          {mostradas.map(item => (
-            <TouchableOpacity key={item.id} style={styles.card} onPress={() => abrirCampanha(item.id)}>
-              {item.foto ? (
-                <Image source={{ uri: item.foto }} style={styles.cardImage} />
-              ) : (
-                <Image source={require("../../assets/instituicao.png")} style={styles.cardImage} />
-              )}
+          {mostradas.length === 0 ? (
+            <View style={[styles.card, styles.cardVazio]}>
+              <Ionicons
+                name="alert-circle-outline"
+                size={60}
+                color="#7A9EB8"
+                style={{ marginBottom: 10 }}
+              />
+              <Text style={styles.cardVazioTitulo}>
+                Nenhuma campanha cadastrada
+              </Text>
+              <Text style={styles.cardVazioTexto}>
+                Cadastre uma nova campanha para começar
+              </Text>
+            </View>
+          ) : (
+            mostradas.map(item => (
+              <TouchableOpacity
+                key={item.id}
+                style={styles.card}
+                onPress={() => abrirCampanha(item.id)}
+              >
+                {item.foto ? (
+                  <Image source={{ uri: item.foto }} style={styles.cardImage} />
+                ) : (
+                  <Image
+                    source={require("../../assets/instituicao.png")}
+                    style={styles.cardImage}
+                  />
+                )}
 
-              <View style={styles.campanhaOverlay}>
-                <Text style={styles.campanhaNome}>{item.nome}</Text>
-                <Text style={styles.campanhaStatus}>Doando agora</Text>
-                <Text style={styles.campanhaValor}>R$ {item.valor ?? "0,00"}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
+                <View style={styles.campanhaOverlay}>
+                  <Text style={styles.campanhaNome}>{item.nome}</Text>
+                  <Text style={styles.campanhaStatus}>Doando agora</Text>
+                  <Text style={styles.campanhaValor}>
+                    R$ {item.valor ?? "0,00"}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))
+          )}
         </ScrollView>
 
-        <TouchableOpacity style={styles.arrowLeft} onPress={scrollLeft}>
-          <Ionicons name="chevron-back-circle" size={30} color="#3D739C" />
-        </TouchableOpacity>
+        {mostradas.length > 1 && (
+          <>
+            <TouchableOpacity style={styles.arrowLeft} onPress={scrollLeft}>
+              <Ionicons name="chevron-back-circle" size={30} color="#3D739C" />
+            </TouchableOpacity>
 
-        <TouchableOpacity style={styles.arrowRight} onPress={scrollRight}>
-          <Ionicons name="chevron-forward-circle" size={30} color="#3D739C" />
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.arrowRight} onPress={scrollRight}>
+              <Ionicons name="chevron-forward-circle" size={30} color="#3D739C" />
+            </TouchableOpacity>
+          </>
+        )}
       </View>
 
       <TouchableOpacity
         style={styles.botaoCadastrar}
         onPress={() => router.push("/cadastrarCampanha")}
       >
-        <Text style={styles.botaoCadastrarTexto}>Cadastrar Nova Campanha</Text>
+        <Text style={styles.botaoCadastrarTexto}>
+          Cadastrar Nova Campanha
+        </Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -266,6 +304,26 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "700",
+  },
+
+  cardVazio: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 25,
+  },
+
+  cardVazioTitulo: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#3D739C",
+    textAlign: "center",
+    marginBottom: 6,
+  },
+
+  cardVazioTexto: {
+    fontSize: 14,
+    color: "#7A9EB8",
+    textAlign: "center",
   },
 
   arrowLeft: {

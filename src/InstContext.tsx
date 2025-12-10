@@ -22,11 +22,6 @@ export function InstituicoesProvider({ children }: any) {
     await AsyncStorage.setItem("@instituicoes", JSON.stringify(lista));
   }
 
-  async function addInst(inst: any) {
-    const novas = [...insts, inst];
-    await salvarInstituicoes(novas);
-  }
-
   function addCampanha(instId: any, campanha: any) {
     const novas = insts.map(inst =>
       String(inst.id) === String(instId)
@@ -59,7 +54,6 @@ export function InstituicoesProvider({ children }: any) {
     <InstituicoesContext.Provider
       value={{
         insts,
-        addInst,
         addCampanha,
         removeCampanha,
       }}

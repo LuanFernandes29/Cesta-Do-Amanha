@@ -46,6 +46,10 @@ export default function PaginaPrincipal() {
     router.push({ pathname: "/instituicaoDoador", params: { id: String(id) } });
   }
 
+  function abrirPerfil() {
+    router.push("/Perfil");
+  }
+
   if (!currentUser) return null;
 
   return (
@@ -58,9 +62,13 @@ export default function PaginaPrincipal() {
           <Text style={styles.subtitulo}>AJUDE COMO PUDER</Text>
         </View>
 
-        <View style={styles.fotoContainer}>
-          <Image source={require("../../assets/fototeste.jpg")} style={styles.perfilImage} />
-        </View>
+        <TouchableOpacity style={styles.fotoContainer} onPress={abrirPerfil}>
+          {currentUser.foto ? (
+            <Image source={{ uri: currentUser.foto }} style={styles.perfilImage} />
+          ) : (
+            <Ionicons name="person-circle-outline" size={60} color="#3D739C" />
+          )}
+        </TouchableOpacity>
       </View>
 
       <View style={styles.searchContainer}>
@@ -73,18 +81,35 @@ export default function PaginaPrincipal() {
       </View>
 
       <View style={styles.carrosselWrapper}>
-        <ScrollView horizontal ref={scrollRef} showsHorizontalScrollIndicator={false} scrollEnabled={false}>
-          {mostradas.map(inst => (
-            <TouchableOpacity key={inst.id} style={styles.card} onPress={() => abrirInstituicao(inst.id)}>
-              <Image
-                source={inst.foto ? { uri: inst.foto } : require("../../assets/instituicao.png")}
-                style={styles.cardImage}
-              />
-              <View style={styles.cardOverlay}>
-                <Text style={styles.cardTitle}>{inst.nome}</Text>
+        <ScrollView
+          horizontal
+          ref={scrollRef}
+          showsHorizontalScrollIndicator={false}
+          scrollEnabled={false}
+        >
+          {mostradas.length === 0 ? (
+            <View style={styles.card} key="empty">
+              <View style={styles.emptyCard}>
+                <Text style={styles.emptyText}>Nenhuma campanha cadastrada</Text>
               </View>
-            </TouchableOpacity>
-          ))}
+            </View>
+          ) : (
+            mostradas.map(inst => (
+              <TouchableOpacity
+                key={String(inst.id)}
+                style={styles.card}
+                onPress={() => abrirInstituicao(inst.id)}
+              >
+                <Image
+                  source={inst.foto ? { uri: inst.foto } : require("../../assets/instituicao.png")}
+                  style={styles.cardImage}
+                />
+                <View style={styles.cardOverlay}>
+                  <Text style={styles.cardTitle}>{inst.nome}</Text>
+                </View>
+              </TouchableOpacity>
+            ))
+          )}
         </ScrollView>
 
         <TouchableOpacity style={styles.arrowLeft} onPress={scrollLeft}>
@@ -105,7 +130,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(239, 237, 237)",
     paddingTop: 50,
   },
-
   cabecalho: {
     paddingHorizontal: 20,
     marginBottom: 30,
@@ -113,35 +137,29 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   titulo: {
     color: "#76A1C2",
     fontSize: 24,
     fontWeight: "700",
   },
-
   subtitulo: {
     color: "#7A9EB8",
     fontSize: 12,
     fontWeight: "600",
     marginTop: 3,
   },
-
   fotoContainer: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    overflow: "hidden",
-    borderWidth: 2,
-    borderColor: "#3D739C",
+    justifyContent: "center",
+    alignItems: "center",
   },
-
   perfilImage: {
     width: "100%",
     height: "100%",
-    resizeMode: "cover",
+    borderRadius: 30,
   },
-
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -154,47 +172,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
   },
-
-  searchIcon: {
-    marginRight: 10,
-  },
-
   searchInput: {
     flex: 1,
     fontSize: 14,
     color: "#021123",
   },
-
   instituicoesHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     paddingHorizontal: 20,
     marginBottom: 15,
-    marginTop: 10,
   },
-
   instituicoesTitulo: {
     fontSize: 27.3,
     fontWeight: "700",
     color: "#3D739C",
   },
-
-  verTudo: {
-    fontSize: 12,
-    color: "#7A9EB8",
-  },
-
   carrosselWrapper: {
     position: "relative",
     marginBottom: 20,
   },
-
-  carrosselContainer: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-
   card: {
     width: CARD_WIDTH,
     height: 350,
@@ -203,18 +198,11 @@ const styles = StyleSheet.create({
     marginRight: CARD_MARGIN,
     backgroundColor: "#fff",
     elevation: 5,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 6,
   },
-
   cardImage: {
     width: "100%",
     height: "100%",
-    resizeMode: "cover",
   },
-
   cardOverlay: {
     position: "absolute",
     bottom: 0,
@@ -223,30 +211,29 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "rgba(0,0,0,0.35)",
   },
-
   cardTitle: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "700",
   },
-
+  emptyCard: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#7A9EB8",
+  },
   arrowLeft: {
     position: "absolute",
     top: "40%",
     left: 5,
-    zIndex: 10,
-    backgroundColor: "rgba(255,255,255,0.7)",
-    borderRadius: 20,
-    padding: 2,
   },
-
   arrowRight: {
     position: "absolute",
     top: "40%",
     right: 5,
-    zIndex: 10,
-    backgroundColor: "rgba(255,255,255,0.7)",
-    borderRadius: 20,
-    padding: 2,
   },
 });

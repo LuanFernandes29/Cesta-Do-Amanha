@@ -11,26 +11,24 @@ import {
   Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
-import { InstituicoesContext } from "../../InstContext";
+import { router } from "expo-router";
+import { UsersContext } from "../../UsersContext";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.82;
 const CARD_MARGIN = 22;
 
 export default function PaginaInstituicao() {
-  const { instId } = useLocalSearchParams(); // <--- PEGA O ID CERTO
+  const { currentUser } = useContext(UsersContext);
 
-  const { insts } = useContext(InstituicoesContext);
+  const campanhas = Array.isArray(currentUser?.campanhas)
+    ? currentUser.campanhas
+    : [];
 
-  const inst = insts.find(i => String(i.id) === String(instId)) ?? null;
-
-  const campanhas = Array.isArray(inst?.campanhas) ? inst.campanhas : [];
+  const mostradas = campanhas.slice(0, 3);
 
   const scrollRef = useRef<ScrollView | null>(null);
-
   let currentScrollPos = 0;
-  const mostradas = campanhas.slice(0, 3);
 
   const scrollRight = () => {
     currentScrollPos += CARD_WIDTH + CARD_MARGIN;
@@ -49,24 +47,25 @@ export default function PaginaInstituicao() {
   function abrirCampanha(id: any) {
     router.push({
       pathname: "/campanhaDetalhes",
-      params: { id: String(id), instId: String(inst?.id) },
+      params: { id: String(id) },
     });
   }
+
+  if (!currentUser) return null;
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <StatusBar barStyle="dark-content" backgroundColor="#e9e6e6" />
 
       <View style={styles.cabecalho}>
-        <View style={styles.textContainer}>
-          <Text style={styles.titulo}>Olá, {inst?.nome ?? "Instituição"}</Text>
+        <View>
+          <Text style={styles.titulo}>Olá, {currentUser.nome}</Text>
           <Text style={styles.subtitulo}>GERENCIE SUAS CAMPANHAS</Text>
         </View>
 
-        {/* FOTO DA INSTITUIÇÃO */}
         <View style={styles.fotoContainer}>
-          {inst?.foto ? (
-            <Image source={{ uri: inst.foto }} style={styles.perfilImage} />
+          {currentUser.foto ? (
+            <Image source={{ uri: currentUser.foto }} style={styles.perfilImage} />
           ) : (
             <Image source={require("../../assets/instituicao.png")} style={styles.perfilImage} />
           )}
@@ -74,25 +73,17 @@ export default function PaginaInstituicao() {
       </View>
 
       <View style={styles.searchContainer}>
-        <Ionicons name="search" size={20} color="#7A9EB8" style={styles.searchIcon} />
+        <Ionicons name="search" size={20} color="#7A9EB8" />
         <TextInput
           style={styles.searchInput}
-          placeholder="Buscar voluntários ou doações"
+          placeholder="Buscar campanhas"
           placeholderTextColor="#7A9EB8"
         />
       </View>
 
       <View style={styles.instituicoesHeader}>
         <Text style={styles.instituicoesTitulo}>Campanhas Ativas</Text>
-
-        <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "/todasCampanhasInstituicao",
-              params: { instId: String(inst?.id) },
-            })
-          }
-        >
+        <TouchableOpacity onPress={() => router.push("/todasCampanhasInstituicao")}>
           <Text style={styles.verTudo}>Ver Todas</Text>
         </TouchableOpacity>
       </View>
@@ -105,12 +96,8 @@ export default function PaginaInstituicao() {
           ref={scrollRef}
           scrollEnabled={false}
         >
-          {mostradas.map((item: any) => (
-            <TouchableOpacity
-              key={item.id}
-              style={styles.card}
-              onPress={() => abrirCampanha(item.id)}
-            >
+          {mostradas.map(item => (
+            <TouchableOpacity key={item.id} style={styles.card} onPress={() => abrirCampanha(item.id)}>
               {item.foto ? (
                 <Image source={{ uri: item.foto }} style={styles.cardImage} />
               ) : (
@@ -124,12 +111,6 @@ export default function PaginaInstituicao() {
               </View>
             </TouchableOpacity>
           ))}
-
-          {mostradas.length === 0 && (
-            <View style={[styles.card, { justifyContent: "center", alignItems: "center" }]}>
-              <Text>Nenhuma campanha ativa</Text>
-            </View>
-          )}
         </ScrollView>
 
         <TouchableOpacity style={styles.arrowLeft} onPress={scrollLeft}>
@@ -143,12 +124,7 @@ export default function PaginaInstituicao() {
 
       <TouchableOpacity
         style={styles.botaoCadastrar}
-        onPress={() =>
-          router.push({
-            pathname: "/cadastrarCampanha",
-            params: { instId: String(inst?.id) },
-          })
-        }
+        onPress={() => router.push("/cadastrarCampanha")}
       >
         <Text style={styles.botaoCadastrarTexto}>Cadastrar Nova Campanha</Text>
       </TouchableOpacity>
@@ -160,28 +136,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "rgb(239, 237, 237)",
-    paddingTop: 50
+    paddingTop: 50,
   },
 
   cabecalho: {
-    paddingHorizontal: 20,
-    marginBottom: 30,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingHorizontal: 20,
+    marginBottom: 30,
   },
 
   titulo: {
     color: "#76A1C2",
     fontSize: 24,
-    fontWeight: "700"
+    fontWeight: "700",
   },
 
   subtitulo: {
     color: "#7A9EB8",
     fontSize: 12,
     fontWeight: "600",
-    marginTop: 3
+    marginTop: 3,
   },
 
   fotoContainer: {
@@ -196,7 +172,7 @@ const styles = StyleSheet.create({
   perfilImage: {
     width: "100%",
     height: "100%",
-    resizeMode: "cover"
+    resizeMode: "cover",
   },
 
   searchContainer: {
@@ -212,14 +188,11 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
   },
 
-  searchIcon: {
-    marginRight: 10
-  },
-
   searchInput: {
     flex: 1,
     fontSize: 14,
-    color: "#021123"
+    color: "#021123",
+    marginLeft: 10,
   },
 
   instituicoesHeader: {
@@ -228,18 +201,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     marginBottom: 15,
-    marginTop: 10
+    marginTop: 10,
   },
 
   instituicoesTitulo: {
-    fontSize: 27.3,
+    fontSize: 27,
     fontWeight: "700",
-    color: "#3D739C"
+    color: "#3D739C",
   },
 
   verTudo: {
     fontSize: 12,
-    color: "#7A9EB8"
+    color: "#7A9EB8",
+  },
+
+  carrosselWrapper: {
+    position: "relative",
+  },
+
+  carrosselContainer: {
+    paddingHorizontal: 20,
   },
 
   card: {
@@ -259,7 +240,7 @@ const styles = StyleSheet.create({
   cardImage: {
     width: "100%",
     height: "100%",
-    resizeMode: "cover"
+    resizeMode: "cover",
   },
 
   campanhaOverlay: {
@@ -273,18 +254,18 @@ const styles = StyleSheet.create({
   campanhaNome: {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "700"
+    fontWeight: "700",
   },
 
   campanhaStatus: {
     color: "#eaeaea",
-    fontSize: 13
+    fontSize: 13,
   },
 
   campanhaValor: {
     color: "#fff",
     fontSize: 16,
-    fontWeight: "700"
+    fontWeight: "700",
   },
 
   arrowLeft: {
@@ -305,16 +286,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.8)",
     borderRadius: 20,
     padding: 2,
-  },
-
-  textContainer: {
-  },
-
-  carrosselWrapper: {
-  },
-
-  carrosselContainer: {
-    paddingHorizontal: 20,
   },
 
   botaoCadastrar: {

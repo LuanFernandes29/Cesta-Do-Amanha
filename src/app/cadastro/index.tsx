@@ -7,7 +7,6 @@ export default function Cadastro() {
 
     const { addUser } = useContext(UsersContext);
 
-    // Estados do Formulário
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -15,7 +14,6 @@ export default function Cadastro() {
     const [telefone, setTelefone] = useState('');
     const [nascimento, setNascimento] = useState('');
 
-    // 🌟 FUNÇÃO PARA ZERAR TODOS OS CAMPOS
     function resetForm() {
         setNome('');
         setEmail('');
@@ -23,13 +21,10 @@ export default function Cadastro() {
         setCep('');
         setTelefone('');
         setNascimento('');
-        console.log("Formulário de usuário resetado!");
     }
 
-    // 💡 Hook para limpar o formulário quando a tela perde o foco (ao clicar em Voltar)
     useFocusEffect(
         useCallback(() => {
-            // Retorna a função de limpeza que será executada quando a tela for desfocada/removida
             return () => {
                 resetForm();
             };
@@ -37,26 +32,24 @@ export default function Cadastro() {
     );
 
     function handleCadastro() {
-        const novoUsuario = {
-            id: Date.now(),
+        const novoUsuarioData = {
             nome,
             email,
             senha,
             cep,
             telefone,
             nascimento,
-            tipo:"user",
         };
 
-        addUser(novoUsuario);
+        // Adiciona o usuário e o loga automaticamente (graças à alteração no UsersContext)
+        addUser(novoUsuarioData);
 
-        console.log("Usuário cadastrado:", novoUsuario);
-
-        router.navigate("/login");
+        // Redireciona diretamente para a página principal
+        router.navigate("/paginaPrincipal"); 
     }
 
     return (
-        // Envolvendo em ScrollView para telas menores
+        
         <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled"> 
             <View style={styles.container}>
                 <Text style={styles.title }>Cesta do amanhã</Text>

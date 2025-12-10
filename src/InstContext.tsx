@@ -1,93 +1,68 @@
-import React, { createContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Definição de Tipos para TSX
-type Campanha = { id: string; titulo: string;[key: string]: any };
-type Instituicao = { id: string; email: string; senha: string; campanhas: Campanha[];[key: string]: any };
-type InstContextType = {
-  insts: Instituicao[];
-  // ✅ CORREÇÃO: addInst agora retorna a Instituicao recém-criada
-  addInst: (inst: Omit<Instituicao, 'id' | 'campanhas'>) => Instituicao;
-  addCampanha: (instId: string, campanha: Campanha) => void;
-  removeCampanha: (instId: string, campanhaId: string) => void;
-  getById: (id: string) => Instituicao | null;
-};
+export const InstituicoesContext = createContext({} as any);
 
-// Valor inicial do Context
-export const InstituicoesContext = createContext<InstContextType>({
-  insts: [],
-  addInst: () => ({} as Instituicao), // Valor mock para o retorno
-  addCampanha: () => { },
-  removeCampanha: () => { },
-  getById: () => null,
-});
-
-export function InstituicoesProvider({ children }: { children: ReactNode }) {
-  const [insts, setInsts] = useState<Instituicao[]>([]);
+export function InstituicoesProvider({ children }: any) {
+  const [insts, setInsts] = useState<any[]>([]);
 
   useEffect(() => {
-    async function load() {
-      const saved = await AsyncStorage.getItem("@insts");
-      if (saved) setInsts(JSON.parse(saved));
-    }
-    load();
+    carregar();
   }, []);
 
-  useEffect(() => {
-    // Salva no AsyncStorage sempre que 'insts' for atualizado
-    AsyncStorage.setItem("@insts", JSON.stringify(insts));
-  }, [insts]);
-
-  // ✅ Função Corrigida: Retorna a nova instituição para o fluxo de cadastro/login
-  function addInst(inst: Omit<Instituicao, 'id' | 'campanhas'>): Instituicao {
-    const newInst: Instituicao = {
-      ...inst,
-      id: Date.now().toString(), // Cria ID único (string)
-      campanhas: []
-    };
-
-    setInsts(prev => [
-      ...prev,
-      newInst
-    ]);
-
-    // Retorna o objeto completo imediatamente
-    return newInst;
+  async function carregar() {
+    const instsSalvas = await AsyncStorage.getItem("@instituicoes");
+    if (instsSalvas) {
+      setInsts(JSON.parse(instsSalvas));
+    }
   }
 
-  // FUNÇÃO ÚNICA E OFICIAL PARA REMOVER CAMPANHA
-  function removeCampanha(instId: string, campanhaId: string) {
-    setInsts(prev =>
-      prev.map(inst =>
-        String(inst.id) === String(instId)
-          ? {
+  async function salvarInstituicoes(lista: any[]) {
+    setInsts(lista);
+    await AsyncStorage.setItem("@instituicoes", JSON.stringify(lista));
+  }
+
+  async function addInst(inst: any) {
+    const novas = [...insts, inst];
+    await salvarInstituicoes(novas);
+  }
+
+  function addCampanha(instId: any, campanha: any) {
+    const novas = insts.map(inst =>
+      String(inst.id) === String(instId)
+        ? {
+            ...inst,
+            campanhas: [...(inst.campanhas || []), campanha],
+          }
+        : inst
+    );
+
+    salvarInstituicoes(novas);
+  }
+
+  function removeCampanha(instId: any, campanhaId: any) {
+    const novas = insts.map(inst =>
+      String(inst.id) === String(instId)
+        ? {
             ...inst,
             campanhas: inst.campanhas.filter(
-              c => String(c.id) !== String(campanhaId)
+              (c: any) => String(c.id) !== String(campanhaId)
             ),
           }
-          : inst
-      )
+        : inst
     );
-  }
 
-  function addCampanha(instId: string, campanha: Campanha) {
-    setInsts(prev =>
-      prev.map(i =>
-        String(i.id) === String(instId)
-          ? { ...i, campanhas: [...(i.campanhas || []), campanha] }
-          : i
-      )
-    );
-  }
-
-  function getById(id: string): Instituicao | null {
-    return insts.find(i => String(i.id) === String(id)) || null;
+    salvarInstituicoes(novas);
   }
 
   return (
     <InstituicoesContext.Provider
-      value={{ insts, addInst, addCampanha, removeCampanha, getById }}
+      value={{
+        insts,
+        addInst,
+        addCampanha,
+        removeCampanha,
+      }}
     >
       {children}
     </InstituicoesContext.Provider>

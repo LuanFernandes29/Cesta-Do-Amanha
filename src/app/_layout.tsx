@@ -6,99 +6,104 @@ import { UsersProvider } from "../UsersContext";
 
 export default function Layout() {
   return (
-    <UsersProvider>
-      <InstituicoesProvider>
+    
+    <InstituicoesProvider>
+      <UsersProvider>
+
         <Drawer
-          screenOptions={
-            {
-              headerStyle: { backgroundColor: '#457b9d' },
-              headerTintColor: '#fff',
-            }
-          }>
+          screenOptions={{
+            headerStyle: { backgroundColor: '#457b9d' },
+            headerTintColor: '#fff',
+          }}
+        >
 
-          <Drawer.Screen name="index" options={{ title: '', headerShown: false,  drawerItemStyle: { display: 'none' }}}/>
-          <Drawer.Screen name="paginaPrincipal/index" options={{ title: 'Página Principal', headerShown: true }}/>
-          <Drawer.Screen name="doacoes/index" options={{ title: 'Doação', headerShown: true }}/>
-          <Drawer.Screen name="instituicaoDoador/index" options={{ title: '', headerShown: true, drawerItemStyle: { display: 'none'}}}/>
-          <Drawer.Screen name="paginaPrincipalInstituicao/index" options={{ title: 'Instituição', headerShown: true }}/>
-          <Drawer.Screen name="cadastrarCampanha/index" options={{ title: '', headerShown: true, drawerItemStyle: { display: 'none'} }}/>
-          <Drawer.Screen name="todasCampanhasInstituicao/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none'} }}/>
-          <Drawer.Screen name="campanhaDetalhes/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none'} }}/>
+          <Drawer.Screen name="index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none' } }} />
+          <Drawer.Screen name="paginaPrincipal/index" options={{ title: 'Página Principal' }} />
+          <Drawer.Screen name="doacoes/index" options={{ title: 'Doação' }} />
+          <Drawer.Screen name="instituicaoDoador/index" options={{ title: '', drawerItemStyle: { display: 'none' } }} />
+          <Drawer.Screen name="paginaPrincipalInstituicao/index" options={{ title: 'Instituição' }} />
+          <Drawer.Screen name="cadastrarCampanha/index" options={{ title: '', drawerItemStyle: { display: 'none' } }} />
+          <Drawer.Screen name="todasCampanhasInstituicao/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none' } }} />
+          <Drawer.Screen name="campanhaDetalhes/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none' } }} />
 
           <Drawer.Screen
-            name='paginaLogin/index'
+            name="paginaLogin/index"
             options={{
               drawerItemStyle: { display: 'none' },
               title: '',
               headerLeft: () => (
                 <Ionicons
-                  name='arrow-back'
+                  name="arrow-back"
                   size={24}
-                  color='#fff'
+                  color="#fff"
                   style={{ marginLeft: 16 }}
                   onPress={() => router.back()}
                 />
               )
             }}
           />
+
           <Drawer.Screen
-            name='cadastro/index' // Cadastro de Usuário (Pessoa Física)
+            name="cadastro/index"
             options={{
               drawerItemStyle: { display: 'none' },
               title: '',
               headerLeft: () => (
                 <Ionicons
-                  name='arrow-back'
+                  name="arrow-back"
                   size={24}
-                  color='#fff'
+                  color="#fff"
                   style={{ marginLeft: 16 }}
                   onPress={() => router.replace('/')}
                 />
               )
             }}
           />
+
           <Drawer.Screen
-            name='cadastroInst/index' // Cadastro de Instituição
+            name="cadastroInst/index"
             options={{
               drawerItemStyle: { display: 'none' },
               title: '',
               headerLeft: () => (
                 <Ionicons
-                  name='arrow-back'
+                  name="arrow-back"
                   size={24}
-                  color='#fff'
+                  color="#fff"
                   style={{ marginLeft: 16 }}
                   onPress={() => router.replace('/')}
                 />
               )
             }}
           />
+
           <Drawer.Screen
-            name='login/index'
+            name="login/index"
             options={{
               drawerItemStyle: { display: 'none' },
               title: '',
               headerLeft: () => (
                 <Ionicons
-                  name='arrow-back'
+                  name="arrow-back"
                   size={24}
-                  color='#fff'
+                  color="#fff"
                   style={{ marginLeft: 16 }}
                   onPress={() => router.back()}
                 />
               )
             }}
           />
+
           <Drawer.Screen
-            name='recuperar/index'
+            name="recuperar/index"
             options={{
               drawerItemStyle: { display: 'none' },
               title: '',
               headerLeft: () => (
                 <Ionicons
-                  name='arrow-back'
+                  name="arrow-back"
                   size={24}
-                  color='#fff'
+                  color="#fff"
                   style={{ marginLeft: 16 }}
                   onPress={() => router.navigate('/login')}
                 />
@@ -107,7 +112,7 @@ export default function Layout() {
           />
 
         </Drawer>
-      </InstituicoesProvider>
-    </UsersProvider>
+      </UsersProvider>
+    </InstituicoesProvider>
   );
 }

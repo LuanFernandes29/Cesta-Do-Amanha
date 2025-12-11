@@ -30,14 +30,27 @@ export default function TodasInstituicoes() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20 },
+  container: { 
+    padding: 20 
+  },
   card: {
     backgroundColor: "#fff",
     marginBottom: 15,
     borderRadius: 12,
     overflow: "hidden",
   },
-  image: { height: 180, width: "100%" },
-  nome: { padding: 12, fontSize: 18, fontWeight: "700", color: "#3D739C" },
-  aviso: { textAlign: "center", marginTop: 30 },
+  image: { 
+    height: 180, 
+    width: "100%" 
+  },
+  nome: { 
+    padding: 12, 
+    fontSize: 18, 
+    fontWeight: "700", 
+    color: "#3D739C" 
+  },
+  aviso: { 
+    textAlign: "center", 
+    marginTop: 30 
+  }
 });

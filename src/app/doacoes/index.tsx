@@ -97,14 +97,55 @@ export default function Doacoes() {
 }
 
 const styles = StyleSheet.create({
-  container: { flexGrow: 1, padding: 20, backgroundColor: "#f5f5f5", alignItems: "center" },
-  label: { fontSize: 14, fontWeight: "600", alignSelf: "flex-start", marginVertical: 10 },
-  amountContainer: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center" },
-  amountButton: { backgroundColor: "#E0E0E0", borderRadius: 8, padding: 10, margin: 5 },
-  amountButtonSelected: { backgroundColor: "#2B6A80" },
-  amountText: { color: "#333" },
-  amountTextSelected: { color: "#fff" },
-  input: { backgroundColor: "#fff", width: "90%", padding: 10, borderRadius: 8, marginVertical: 10 },
-  doarButton: { backgroundColor: "#2B6A80", padding: 12, borderRadius: 8, width: "90%", alignItems: "center", marginTop: 15 },
-  doarText: { color: "#fff", fontWeight: "700" },
+  container: { 
+    flexGrow: 1, 
+    padding: 20, 
+    backgroundColor: "#f5f5f5", 
+    alignItems: "center" 
+  },
+  label: { 
+    fontSize: 14, 
+    fontWeight: "600", 
+    alignSelf: "flex-start", 
+    marginVertical: 10 
+  },
+  amountContainer: { 
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    justifyContent: "center" 
+  },
+  amountButton: { 
+    backgroundColor: "#E0E0E0", 
+    borderRadius: 8, 
+    padding: 10, 
+    margin: 5 
+  },
+  amountButtonSelected: { 
+    backgroundColor: "#2B6A80" 
+  },
+  amountText: { 
+    color: "#333" 
+  },
+  amountTextSelected: { 
+    color: "#fff" 
+  },
+  input: { 
+    backgroundColor: "#fff", 
+    width: "90%", 
+    padding: 10, 
+    borderRadius: 8, 
+    marginVertical: 10 
+  },
+  doarButton: { 
+    backgroundColor: "#2B6A80", 
+    padding: 12, 
+    borderRadius: 8, 
+    width: "90%", 
+    alignItems: "center", 
+    marginTop: 15 
+  },
+  doarText: { 
+    color: "#fff", 
+    fontWeight: "700" 
+  }
 });

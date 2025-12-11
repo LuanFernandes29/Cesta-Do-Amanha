@@ -26,7 +26,6 @@ export default function Layout() {
             headerStyle: { backgroundColor: "#457b9d" },
             headerTintColor: "#fff",
 
-            // 🚫 Remove hamburger globalmente
             headerLeft: () => null,
           }}
         >

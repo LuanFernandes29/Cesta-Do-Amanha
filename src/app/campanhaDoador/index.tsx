@@ -1,13 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useContext, useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
   ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  Alert,
+  View
 } from "react-native";
-import { useLocalSearchParams, router } from "expo-router";
 import { InstituicoesContext } from "../../InstContext";
 
 export default function CampanhaDoador() {
@@ -65,10 +64,26 @@ export default function CampanhaDoador() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#FFF" },
-  title: { fontSize: 22, fontWeight: "700", marginBottom: 10 },
-  info: { fontSize: 16, marginBottom: 6 },
-  description: { fontSize: 15, marginVertical: 12, lineHeight: 22, color: "#333" },
+  container: { 
+    flex: 1, 
+    padding: 20, 
+    backgroundColor: "#FFF" 
+  },
+  title: { 
+    fontSize: 22, 
+    fontWeight: "700", 
+    marginBottom: 10 
+  },
+  info: { 
+    fontSize: 16, 
+    marginBottom: 6 
+  },
+  description: { 
+    fontSize: 15, 
+    marginVertical: 12, 
+    lineHeight: 22, 
+    color: "#333" 
+  },
   doarButton: {
     backgroundColor: "#2B6A80",
     paddingVertical: 12,
@@ -76,5 +91,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  doarText: { color: "#fff", fontSize: 16, fontWeight: "700" },
+  doarText: { 
+    color: "#fff", 
+    fontSize: 16, 
+    fontWeight: "700" 
+  }
 });

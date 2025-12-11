@@ -12,22 +12,6 @@ export default function Recuperar(){
     function recuperar() {
         alert("Email enviado!");
     }
-    // function recuperar() {
-    //     if(userMail !== '') {
-    //         sendPasswordResetEmail(auth, userMail)
-    //         .then(() => {
-    //             alert ("Email enviado para: " + userMail + ". Verifique sua caixa de entrada!");
-    //         })
-    //         .catch((error) => {
-    //             const errorMessage = error.message;
-    //             alert("Erro ao enviar email: " + errorMessage);
-    //             return
-    //         });
-    //     } else {
-    //         alert ("Por favor, insira um email válido!");
-    //         return;
-    //     }
-    // }
 
     return(
         <View style={styles.container}>

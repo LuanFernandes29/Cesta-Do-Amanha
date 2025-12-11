@@ -6,13 +6,12 @@ import { Text, View, StyleSheet, Platform } from "react-native";
 
 export default function Principal() {
     return (
-        // O container principal ainda usa flex: 1 e flex-start para o título ir para o topo
         <View style={styles.container}>
 
             {/* VIEW DO TÍTULO: Fica no topo */}
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Cesta do amanhã</Text>
-                <Text style={styles.subtitle}>Voluntaria-se</Text>
+                <Text style={styles.subtitle}>Voluntarie-se</Text>
             </View>
 
             {/* NOVO CONTAINER: Envolve os botões e usa justifyContent: 'center' */}
@@ -33,7 +32,6 @@ export default function Principal() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // Mantém 'flex-start' para o alinhamento principal, empurrando o título para cima
         justifyContent: 'flex-start', 
         alignItems: 'center',
         backgroundColor: '#457b9d',
@@ -43,15 +41,15 @@ const styles = StyleSheet.create({
     
     
     contentContainer: {
-        flex: 1, // Faz com que ocupe todo o espaço vertical restante
+        flex: 1, 
         width: '100%',
-        justifyContent: 'center', // Centraliza verticalmente todos os itens dentro dele
-        alignItems: 'center', // Centraliza horizontalmente
-        paddingHorizontal: 20, // Opcional: Adiciona padding horizontal para botões maiores
+        justifyContent: 'center', 
+        alignItems: 'center',
+        paddingHorizontal: 20, 
     },
 
     titleContainer: {
-        marginBottom: 30, // Margem abaixo do título para separá-lo dos botões
+        marginBottom: 30, 
     },
 
    title: { 

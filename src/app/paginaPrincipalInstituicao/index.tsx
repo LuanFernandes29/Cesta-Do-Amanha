@@ -66,16 +66,21 @@ export default function PaginaInstituicao() {
           <Text style={styles.subtitulo}>GERENCIE SUAS CAMPANHAS</Text>
         </View>
 
-        <View style={styles.fotoContainer}>
-          {currentUser.foto ? (
-            <Image source={{ uri: currentUser.foto }} style={styles.perfilImage} />
-          ) : (
-            <Image
-              source={require("../../assets/instituicao.png")}
-              style={styles.perfilImage}
-            />
-          )}
-        </View>
+        
+          <TouchableOpacity
+            onPress={() => router.push("/perfilInst")}
+            style={styles.fotoContainer}
+          >
+            {currentUser.foto ? (
+              <Image source={{ uri: currentUser.foto }} style={styles.perfilImage} />
+            ) : (
+              <Image
+                source={require("../../assets/instituicao.png")}
+                style={styles.perfilImage}
+              />
+            )}
+          </TouchableOpacity>
+
       </View>
 
       <View style={styles.searchContainer}>

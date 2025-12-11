@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { router } from "expo-router";
 import { Pressable, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 
@@ -10,24 +10,33 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  // Limpa campos ao entrar na página
+  useEffect(() => {
+    setEmail("");
+    setSenha("");
+  }, []);
+
   function VerifyLogin() {
-  const user = login(email, senha);
+    const user = login(email, senha);
 
-  if (!user) {
-    alert("Email ou senha incorretos!");
-    return;
+    // Limpa campos independentemente do sucesso
+    setEmail("");
+    setSenha("");
+
+    if (!user) {
+      alert("Email ou senha incorretos!");
+      return;
+    }
+
+    if (user.tipo === "instituicao") {
+      router.push({
+        pathname: "/paginaPrincipalInstituicao",
+        params: { instId: user.id },
+      });
+    } else {
+      router.replace("/paginaPrincipal");
+    }
   }
-
-  if (user.tipo === "instituicao") {
-    router.push({
-      pathname: "/paginaPrincipalInstituicao",
-      params: { instId: user.id },
-    });
-  } else {
-    router.replace("/paginaPrincipal");
-  }
-}
-
 
   return (
     <View style={styles.container}>
@@ -78,7 +87,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginBottom: 20
   },
-
   branco: {
     backgroundColor: "#fff",
     padding: 20,

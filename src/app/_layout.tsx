@@ -1,116 +1,184 @@
-import { InstituicoesProvider } from '@/InstContext';
-import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
-import { Drawer } from 'expo-router/drawer';
+import { InstituicoesProvider } from "@/InstContext";
 import { UsersProvider } from "../UsersContext";
+
+import { Ionicons } from "@expo/vector-icons";
+import { Drawer } from "expo-router/drawer";
+import { router } from "expo-router";
+
+function BackButton({ path }: { path: string }) {
+  return (
+    <Ionicons
+      name="arrow-back"
+      size={24}
+      color="#fff"
+      style={{ marginLeft: 16 }}
+      onPress={() => router.navigate(path)}
+    />
+  );
+}
 
 export default function Layout() {
   return (
-    
     <InstituicoesProvider>
       <UsersProvider>
-
         <Drawer
           screenOptions={{
-            headerStyle: { backgroundColor: '#457b9d' },
-            headerTintColor: '#fff',
+            headerStyle: { backgroundColor: "#457b9d" },
+            headerTintColor: "#fff",
+
+            // 🚫 Remove hamburger globalmente
+            headerLeft: () => null,
           }}
         >
+          {/* ================= INÍCIO ================= */}
+          <Drawer.Screen
+            name="index"
+            options={{
+              headerShown: false,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
 
-          <Drawer.Screen name="index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none' } }} />
-          <Drawer.Screen name="paginaPrincipal/index" options={{ title: 'Página Principal' }} />
-          <Drawer.Screen name="doacoes/index" options={{ title: 'Doação' }} />
-          <Drawer.Screen name="instituicaoDoador/index" options={{ title: '', drawerItemStyle: { display: 'none' } }} />
-          <Drawer.Screen name="paginaPrincipalInstituicao/index" options={{ title: 'Instituição' }} />
-          <Drawer.Screen name="cadastrarCampanha/index" options={{ title: '', drawerItemStyle: { display: 'none' } }} />
-          <Drawer.Screen name="todasCampanhasInstituicao/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none' } }} />
-          <Drawer.Screen name="campanhaDetalhes/index" options={{ title: '', headerShown: false, drawerItemStyle: { display: 'none' } }} />
+          {/* ================= PRINCIPAIS ================= */}
+          <Drawer.Screen
+            name="paginaPrincipal/index"
+            options={{
+              headerShown: false,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+
+          <Drawer.Screen
+            name="paginaPrincipalInstituicao/index"
+            options={{
+              headerShown: false,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+
+          {/* ================= TELAS INTERNAS ================= */}
+          <Drawer.Screen
+            name="instituicaoDoador/index"
+            options={{
+              title: "",
+              headerLeft: () => <BackButton path="/paginaPrincipal" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+          <Drawer.Screen
+            name="campanhaDoador/index"
+            options={{
+              title: "",
+              headerLeft: () => <BackButton path="/paginaPrincipal" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+          <Drawer.Screen
+            name="todasinstituicoes/index"
+            options={{
+              title: "",
+              headerLeft: () => <BackButton path="/paginaPrincipal" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+          <Drawer.Screen
+            name="perfilInst/index"
+            options={{
+              title: "",
+              headerLeft: () => <BackButton path="/paginaPrincipalInstituicao" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+
+          <Drawer.Screen
+            name="Perfil/index"
+            options={{
+              title: "",
+              headerLeft: () => <BackButton path="/paginaPrincipal" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+
+          <Drawer.Screen
+            name="campanhaDetalhes/index"
+            options={{
+              title: "",
+              headerShown: false,
+            }}
+          />
+
+          <Drawer.Screen
+            name="doacoes/index"
+            options={{
+              title: "Doação",
+              headerLeft: () => <BackButton path="/paginaPrincipal" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+
+          <Drawer.Screen
+            name="cadastrarCampanha/index"
+            options={{
+              title: "",
+              headerLeft: () => <BackButton path="/paginaPrincipalInstituicao" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+
+          <Drawer.Screen
+            name="todasCampanhasInstituicao/index"
+            options={{
+              headerShown: false,
+              headerLeft: () => <BackButton path="/paginaPrincipalInstituicao" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+
+          {/* ================= AUTH ================= */}
+          <Drawer.Screen
+            name="login/index"
+            options={{
+              title: "",
+              headerLeft: () => <BackButton path="/" />,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
 
           <Drawer.Screen
             name="paginaLogin/index"
             options={{
-              drawerItemStyle: { display: 'none' },
-              title: '',
-              headerLeft: () => (
-                <Ionicons
-                  name="arrow-back"
-                  size={24}
-                  color="#fff"
-                  style={{ marginLeft: 16 }}
-                  onPress={() => router.back()}
-                />
-              )
+              title: "",
+              headerLeft: () => <BackButton path="/" />,
+              drawerItemStyle: { display: "none" },
             }}
           />
 
           <Drawer.Screen
             name="cadastro/index"
             options={{
-              drawerItemStyle: { display: 'none' },
-              title: '',
-              headerLeft: () => (
-                <Ionicons
-                  name="arrow-back"
-                  size={24}
-                  color="#fff"
-                  style={{ marginLeft: 16 }}
-                  onPress={() => router.replace('/')}
-                />
-              )
+              title: "",
+              headerLeft: () => <BackButton path="/paginaLogin" />,
+              drawerItemStyle: { display: "none" },
             }}
           />
 
           <Drawer.Screen
             name="cadastroInst/index"
             options={{
-              drawerItemStyle: { display: 'none' },
-              title: '',
-              headerLeft: () => (
-                <Ionicons
-                  name="arrow-back"
-                  size={24}
-                  color="#fff"
-                  style={{ marginLeft: 16 }}
-                  onPress={() => router.replace('/')}
-                />
-              )
-            }}
-          />
-
-          <Drawer.Screen
-            name="login/index"
-            options={{
-              drawerItemStyle: { display: 'none' },
-              title: '',
-              headerLeft: () => (
-                <Ionicons
-                  name="arrow-back"
-                  size={24}
-                  color="#fff"
-                  style={{ marginLeft: 16 }}
-                  onPress={() => router.back()}
-                />
-              )
+              title: "",
+              headerLeft: () => <BackButton path="/paginaLogin" />,
+              drawerItemStyle: { display: "none" },
             }}
           />
 
           <Drawer.Screen
             name="recuperar/index"
             options={{
-              drawerItemStyle: { display: 'none' },
-              title: '',
-              headerLeft: () => (
-                <Ionicons
-                  name="arrow-back"
-                  size={24}
-                  color="#fff"
-                  style={{ marginLeft: 16 }}
-                  onPress={() => router.navigate('/login')}
-                />
-              )
+              title: "",
+              headerLeft: () => <BackButton path="/login" />,
+              drawerItemStyle: { display: "none" },
             }}
           />
-
         </Drawer>
       </UsersProvider>
     </InstituicoesProvider>

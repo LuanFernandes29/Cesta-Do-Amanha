@@ -64,6 +64,7 @@ export default function Perfil() {
         });
 
         Alert.alert("Sucesso", "Perfil atualizado");
+        router.navigate('/paginaPrincipal')
     }
 
     function sair() {

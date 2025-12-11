@@ -38,26 +38,32 @@ export default function CadastroInst() {
 
   useFocusEffect(
     useCallback(() => {
-      return () => {
-        resetForm();
-      };
+      return () => resetForm();
     }, [])
   );
 
   async function escolherFoto() {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert("Permissão necessária", "Permita o acesso à galeria");
-      return;
-    }
+    try {
+      const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1
-    });
+      if (!permission.granted) {
+        Alert.alert("Permissão necessária", "Permita o acesso à galeria");
+        return;
+      }
 
-    if (!result.canceled) {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        allowsEditing: true,
+        quality: 1
+      });
+
+      if (!result) return;
+      if (result.canceled) return;
+      if (!result.assets || result.assets.length === 0) return;
+
       setFoto(result.assets[0].uri);
+    } catch {
+      Alert.alert("Erro", "Erro ao selecionar imagem");
     }
   }
 
@@ -71,34 +77,37 @@ export default function CadastroInst() {
       !cpfResp.trim() ||
       !foto
     ) {
-      Alert.alert(
-        "Campos obrigatórios",
-        "Preencha todos os campos para continuar"
-      );
+      Alert.alert("Campos obrigatórios", "Preencha todos os campos");
       return;
     }
 
     const instData = {
+      id: Date.now().toString(),
       nome,
       email,
       senha,
       cpfCnpj,
       cep,
       cpfResp,
-      foto
+      foto,
+      campanhas: []
     };
 
     await addInst(instData);
 
-    router.push("/login");
+    router.replace("/login");
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+    <ScrollView
+      contentContainerStyle={styles.scrollContainer}
+      keyboardShouldPersistTaps="handled"
+    >
       <View style={styles.container}>
         <Text style={styles.title}>Cesta do amanhã</Text>
-        <Text style={styles.subTitle}>Insira seus dados e junte-se {"\n"}a nós</Text>
-        <StatusBar />
+        <Text style={styles.subTitle}>
+          Insira seus dados e junte-se {"\n"}a nós
+        </Text>
 
         <View style={styles.branco}>
           <Text style={styles.textDadosNome}>NOME FANTASIA</Text>
@@ -111,7 +120,6 @@ export default function CadastroInst() {
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
-            autoComplete="email"
           />
 
           <Text style={styles.textDados}>CRIE UMA SENHA</Text>
@@ -119,18 +127,25 @@ export default function CadastroInst() {
             style={styles.inputText}
             value={senha}
             onChangeText={setSenha}
-            autoCapitalize="none"
             secureTextEntry
           />
 
           <Text style={styles.textDados}>CPF OU CNPJ</Text>
-          <TextInput style={styles.inputText} value={cpfCnpj} onChangeText={setCpfCnpj} />
+          <TextInput
+            style={styles.inputText}
+            value={cpfCnpj}
+            onChangeText={setCpfCnpj}
+          />
 
           <Text style={styles.textDados}>CEP</Text>
           <TextInput style={styles.inputText} value={cep} onChangeText={setCep} />
 
           <Text style={styles.textDados}>CPF DO RESPONSÁVEL</Text>
-          <TextInput style={styles.inputText} value={cpfResp} onChangeText={setCpfResp} />
+          <TextInput
+            style={styles.inputText}
+            value={cpfResp}
+            onChangeText={setCpfResp}
+          />
 
           <Pressable style={styles.fotoBtn} onPress={escolherFoto}>
             <Text style={styles.fotoTxt}>
@@ -144,6 +159,8 @@ export default function CadastroInst() {
             <Text style={styles.buttonText}>Cadastrar</Text>
           </Pressable>
         </View>
+
+        <StatusBar />
       </View>
     </ScrollView>
   );
@@ -174,17 +191,12 @@ const styles = StyleSheet.create({
   },
   branco: {
     marginTop: 20,
-    gap: 5,
     backgroundColor: "#fff",
     borderRadius: 25,
     width: "90%",
     paddingBottom: 20,
     paddingHorizontal: 10,
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84
+    elevation: 5
   },
   textDadosNome: {
     marginLeft: 14,

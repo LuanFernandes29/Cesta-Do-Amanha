@@ -7,20 +7,30 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { InstituicoesContext } from "../../InstContext";
+import { UsersContext } from "../../UsersContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
 export default function TodasCampanhasInstituicao() {
-  const { insts } = useContext(InstituicoesContext);
-  const inst = insts && insts.length > 0 ? insts[0] : null;
+  const { currentUser } = useContext(UsersContext);
 
-  const campanhas = Array.isArray(inst?.campanhas) ? inst.campanhas : [];
+  // Garantir que o usuário logado seja uma instituição
+  if (!currentUser || currentUser.tipo !== "instituicao") {
+    return (
+      <View style={styles.avisoContainer}>
+        <Text style={styles.aviso}>Nenhuma instituição logada.</Text>
+      </View>
+    );
+  }
+
+  const campanhas = Array.isArray(currentUser.campanhas)
+    ? currentUser.campanhas
+    : [];
 
   function abrirCampanha(id: any) {
     router.push({
       pathname: "/campanhaDetalhes",
-      params: { id: String(id), instId: String(inst?.id ?? "") },
+      params: { id: String(id), instId: String(currentUser.id) },
     });
   }
 
@@ -28,7 +38,7 @@ export default function TodasCampanhasInstituicao() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.navigate('/paginaPrincipalInstituicao')}>
+        <TouchableOpacity onPress={() => router.navigate("/paginaPrincipalInstituicao")}>
           <Ionicons name="arrow-back" size={26} color="#3D739C" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Todas as Campanhas</Text>
@@ -37,32 +47,32 @@ export default function TodasCampanhasInstituicao() {
 
       {/* Lista de campanhas */}
       <View style={styles.content}>
-        {campanhas.map((camp: any) => (
-          <TouchableOpacity
-            key={camp.id}
-            style={styles.card}
-            onPress={() => abrirCampanha(camp.id)}
-          >
-            {camp.foto ? (
-              <Image source={{ uri: camp.foto }} style={styles.cardImage} />
-            ) : (
+        {campanhas.length > 0 ? (
+          campanhas.map(camp => (
+            <TouchableOpacity
+              key={camp.id}
+              style={styles.card}
+              onPress={() => abrirCampanha(camp.id)}
+            >
+              {camp.foto ? (
+                <Image source={{ uri: camp.foto }} style={styles.cardImage} />
+              ) : (
                 <Image
-                source={require("../../assets/instituicao.png")}
-                style={styles.cardImage}
-              />
-            )}
+                  source={require("../../assets/instituicao.png")}
+                  style={styles.cardImage}
+                />
+              )}
 
-            <View style={styles.cardInfo}>
-              <Text style={styles.cardNome}>{camp.nome}</Text>
-              <Text style={styles.cardDesc} numberOfLines={2}>
-                {camp.descricao}
-              </Text>
-              <Text style={styles.cardValor}>R$ {camp.valor ?? "0,00"}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-
-        {campanhas.length === 0 && (
+              <View style={styles.cardInfo}>
+                <Text style={styles.cardNome}>{camp.nome}</Text>
+                <Text style={styles.cardDesc} numberOfLines={2}>
+                  {camp.descricao}
+                </Text>
+                <Text style={styles.cardValor}>R$ {camp.valor ?? "0,00"}</Text>
+              </View>
+            </TouchableOpacity>
+          ))
+        ) : (
           <Text style={styles.aviso}>Nenhuma campanha cadastrada ainda.</Text>
         )}
       </View>
@@ -137,5 +147,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     fontSize: 16,
     color: "#6D8FA6",
+  },
+
+  avisoContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

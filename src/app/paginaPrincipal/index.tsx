@@ -78,6 +78,10 @@ export default function PaginaPrincipal() {
 
       <View style={styles.instituicoesHeader}>
         <Text style={styles.instituicoesTitulo}>Principais Instituições</Text>
+
+        <TouchableOpacity onPress={() => router.push("/todasinstituicoes")}>
+          <Text style={styles.verTudo}>Ver todas</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.carrosselWrapper}>
@@ -125,115 +129,24 @@ export default function PaginaPrincipal() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "rgb(239, 237, 237)",
-    paddingTop: 50,
-  },
-  cabecalho: {
-    paddingHorizontal: 20,
-    marginBottom: 30,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  titulo: {
-    color: "#76A1C2",
-    fontSize: 24,
-    fontWeight: "700",
-  },
-  subtitulo: {
-    color: "#7A9EB8",
-    fontSize: 12,
-    fontWeight: "600",
-    marginTop: 3,
-  },
-  fotoContainer: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  perfilImage: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 30,
-  },
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    height: 40,
-    marginHorizontal: 20,
-    marginBottom: 30,
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 14,
-    color: "#021123",
-  },
-  instituicoesHeader: {
-    paddingHorizontal: 20,
-    marginBottom: 15,
-  },
-  instituicoesTitulo: {
-    fontSize: 27.3,
-    fontWeight: "700",
-    color: "#3D739C",
-  },
-  carrosselWrapper: {
-    position: "relative",
-    marginBottom: 20,
-  },
-  card: {
-    width: CARD_WIDTH,
-    height: 350,
-    borderRadius: 15,
-    overflow: "hidden",
-    marginRight: CARD_MARGIN,
-    backgroundColor: "#fff",
-    elevation: 5,
-  },
-  cardImage: {
-    width: "100%",
-    height: "100%",
-  },
-  cardOverlay: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 10,
-    backgroundColor: "rgba(0,0,0,0.35)",
-  },
-  cardTitle: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "700",
-  },
-  emptyCard: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  emptyText: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#7A9EB8",
-  },
-  arrowLeft: {
-    position: "absolute",
-    top: "40%",
-    left: 5,
-  },
-  arrowRight: {
-    position: "absolute",
-    top: "40%",
-    right: 5,
-  },
+  container: { flex: 1, backgroundColor: "rgb(239, 237, 237)", paddingTop: 50 },
+  cabecalho: { paddingHorizontal: 20, marginBottom: 30, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  titulo: { color: "#76A1C2", fontSize: 24, fontWeight: "700" },
+  subtitulo: { color: "#7A9EB8", fontSize: 12, fontWeight: "600", marginTop: 3 },
+  fotoContainer: { width: 60, height: 60, borderRadius: 30, justifyContent: "center", alignItems: "center" },
+  perfilImage: { width: "100%", height: "100%", borderRadius: 30 },
+  searchContainer: { flexDirection: "row", alignItems: "center", backgroundColor: "#fff", borderRadius: 20, paddingHorizontal: 15, height: 40, marginHorizontal: 20, marginBottom: 30, borderWidth: 1, borderColor: "#ccc" },
+  searchInput: { flex: 1, fontSize: 14, color: "#021123" },
+  instituicoesHeader: { paddingHorizontal: 20, marginBottom: 15, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  instituicoesTitulo: { fontSize: 27.3, fontWeight: "700", color: "#3D739C" },
+  verTudo: { fontSize: 13, color: "#7A9EB8" },
+  carrosselWrapper: { position: "relative", marginBottom: 20 },
+  card: { width: CARD_WIDTH, height: 350, borderRadius: 15, overflow: "hidden", marginRight: CARD_MARGIN, backgroundColor: "#fff", elevation: 5 },
+  cardImage: { width: "100%", height: "100%" },
+  cardOverlay: { position: "absolute", bottom: 0, left: 0, right: 0, padding: 10, backgroundColor: "rgba(0,0,0,0.35)" },
+  cardTitle: { color: "#fff", fontSize: 18, fontWeight: "700" },
+  emptyCard: { flex: 1, justifyContent: "center", alignItems: "center" },
+  emptyText: { fontSize: 18, fontWeight: "600", color: "#7A9EB8" },
+  arrowLeft: { position: "absolute", top: "40%", left: 5 },
+  arrowRight: { position: "absolute", top: "40%", right: 5 },
 });
